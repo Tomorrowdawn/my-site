@@ -1,0 +1,58 @@
+---
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+];
+---
+
+<nav class="nav">
+  <div class="nav-content">
+    <a href="/" class="nav-logo">NAV</a>
+    <ul class="nav-links">
+      {navItems.map(item => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    color: var(--color-text-muted);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+</style>

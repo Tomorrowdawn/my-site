@@ -1,0 +1,56 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  date: string;
+  excerpt?: string;
+}
+
+const { title, slug, date, excerpt } = Astro.props;
+---
+
+<article class="post-card">
+  <a href={`/posts/${slug}`}>
+    <h2 class="post-title">{title}</h2>
+  </a>
+  <div class="post-meta">
+    <span class="post-date">Abstract: {date}</span>
+    {excerpt && <p class="post-excerpt">{excerpt}</p>}
+  </div>
+</article>
+
+<style>
+  .post-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-card:last-child {
+    border-bottom: none;
+  }
+
+  .post-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .post-title:hover {
+    text-decoration: underline;
+  }
+
+  .post-meta {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .post-date {
+    display: inline-block;
+  }
+
+  .post-excerpt {
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+</style>

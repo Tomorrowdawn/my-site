@@ -1,0 +1,62 @@
+---
+interface Props {
+  current?: string;
+}
+
+const { current = "all" } = Astro.props;
+
+const categories = [
+  { id: "all", label: "All" },
+  { id: "math", label: "Math" },
+  { id: "philosophy", label: "Philosophy" },
+  { id: "code", label: "Code" },
+];
+---
+
+<nav class="category-tabs">
+  {categories.map(cat => (
+    <a 
+      href={cat.id === "all" ? "/" : `/?category=${cat.id}`}
+      class:list={["tab", { active: current === cat.id }]}
+    >
+      {cat.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .category-tabs {
+    display: flex;
+    gap: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1rem;
+  }
+
+  .tab {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .tab:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .tab.active {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-text);
+  }
+</style>

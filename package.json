@@ -1,0 +1,20 @@
+{
+  "name": "my-website",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && npx gh-pages -d dist"
+  },
+  "dependencies": {
+    "astro": "^5.16.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,86 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Nav from "@components/Nav.astro";
+import Profile from "@components/Profile.astro";
+import CategoryTabs from "@components/CategoryTabs.astro";
+import PostCard from "@components/PostCard.astro";
+import Pagination from "@components/Pagination.astro";
+import { getCollection } from "astro:content";
+
+const POSTS_PER_PAGE = 10;
+
+const url = new URL(Astro.request.url);
+const category = url.searchParams.get("category") || "all";
+const page = parseInt(url.searchParams.get("page") || "1");
+
+const allPosts = await getCollection("posts");
+
+const filteredPosts = category === "all"
+  ? allPosts
+  : allPosts.filter(post => post.data.tags.includes(category as any));
+
+const sortedPosts = filteredPosts.sort((a, b) => 
+  new Date(b.data.createdAt).getTime() - new Date(a.data.createdAt).getTime()
+);
+
+const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+const startIndex = (page - 1) * POSTS_PER_PAGE;
+const paginatedPosts = sortedPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
+const baseUrl = category === "all" ? "/" : `/?category=${category}`;
+---
+
+<BaseLayout title="Home | My Website">
+  <Nav />
+  <main class="container">
+    <Profile />
+    <section class="feed">
+      <CategoryTabs current={category} />
+      <div class="posts">
+        {paginatedPosts.length > 0 ? (
+          paginatedPosts.map(post => (
+            <PostCard
+              title={post.data.title}
+              slug={post.slug}
+              date={post.data.createdAt}
+              excerpt={post.data.excerpt}
+            />
+          ))
+        ) : (
+          <p class="no-posts">No posts found.</p>
+        )}
+      </div>
+      <Pagination currentPage={page} totalPages={totalPages} baseUrl={baseUrl} />
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    gap: 3rem;
+    padding: 2rem;
+  }
+
+  .feed {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .posts {
+    margin-top: 1rem;
+  }
+
+  .no-posts {
+    color: var(--color-text-muted);
+    padding: 2rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  }
+</style>

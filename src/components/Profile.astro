@@ -1,0 +1,106 @@
+---
+interface Props {
+  avatar?: string;
+  name?: string;
+  bio?: string;
+}
+
+const { 
+  avatar = "/avatar.svg",
+  name = "TomorrowDawn",
+  bio = "Math, Philosophy, Code."
+} = Astro.props;
+
+const links = [
+  { icon: "twitter", url: "https://twitter.com/", label: "Twitter" },
+  { icon: "github", url: "https://github.com/tomorrowdawn", label: "GitHub" },
+  { icon: "linkedin", url: "https://linkedin.com/", label: "LinkedIn" },
+];
+---
+
+<aside class="profile">
+  <div class="avatar">
+    <img src={avatar} alt={name} />
+  </div>
+  <p class="bio">{bio}</p>
+  <div class="links">
+    <h4>Links</h4>
+    <div class="link-icons">
+      {links.map(link => (
+        <a href={link.url} target="_blank" rel="noopener noreferrer" title={link.label}>
+          <span class="icon">{link.icon[0].toUpperCase()}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</aside>
+
+<style>
+  .profile {
+    width: var(--sidebar-width);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .bio {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .links h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .link-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .link-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: #f0f0f0;
+    color: var(--color-text-muted);
+    transition: all 0.2s;
+  }
+
+  .link-icons a:hover {
+    background: var(--color-text);
+    color: white;
+    text-decoration: none;
+  }
+
+  .icon {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+</style>
