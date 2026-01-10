@@ -12,13 +12,15 @@ const categories = [
   { id: "code", label: "Code" },
 ];
 
-const base = import.meta.env.DEV ? "" : "/my-website";
+// 使用 Astro 内置的 base 路径，避免硬编码
+const base = import.meta.env.BASE_URL || "/";
+const normalizedBase = base.endsWith("/") ? base : `${base}/`;
 ---
 
 <nav class="category-tabs" aria-label="Post categories">
   {categories.map(cat => (
-    <a 
-      href={cat.id === "all" ? `${base}/` : `${base}/?category=${cat.id}`}
+    <a
+      href={cat.id === "all" ? normalizedBase : `${normalizedBase}?category=${cat.id}`}
       class:list={["tab", { active: current === cat.id }]}
       aria-current={current === cat.id ? "page" : undefined}
       data-feeds-link
