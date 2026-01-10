@@ -25,5 +25,3 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Local scripts (one-time tools, keep outside of git)
-scripts/
