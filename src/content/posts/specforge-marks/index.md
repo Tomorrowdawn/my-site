@@ -12,7 +12,7 @@ excerpt: "> 记录一下 > > specForge > > 的一些代码点。仅供速查"
 > 
 > 的一些代码点。仅供速查
 
-```python3
+```python
 t2d = torch.zeros(self.vocab_size, dtype=torch.bool)
 d2t = torch.zeros(self.draft_vocab_size, dtype=torch.int64)
 self.register_buffer("t2d", t2d)

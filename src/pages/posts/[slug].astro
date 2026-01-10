@@ -82,38 +82,67 @@ const { Content } = await render(post);
     line-height: 1.8;
   }
 
-  .post-content :global(h2) {
+  .post-content :global(h2),
+  .post-excerpt :global(h2) {
     font-size: 1.5rem;
     margin: 2rem 0 1rem;
   }
 
-  .post-content :global(h3) {
+  .post-content :global(h3),
+  .post-excerpt :global(h3) {
     font-size: 1.25rem;
     margin: 1.5rem 0 0.75rem;
   }
 
-  .post-content :global(p) {
+  .post-content :global(p),
+  .post-excerpt :global(p) {
     margin-bottom: 1rem;
   }
 
   .post-content :global(ul),
-  .post-content :global(ol) {
+  .post-content :global(ol),
+  .post-excerpt :global(ul),
+  .post-excerpt :global(ol) {
     margin-bottom: 1rem;
     padding-left: 1.5rem;
   }
 
-  .post-content :global(li) {
+  .post-content :global(ol),
+  .post-excerpt :global(ol) {
+    list-style-type: decimal;
+  }
+
+  .post-content :global(ul),
+  .post-excerpt :global(ul) {
+    list-style-type: disc;
+  }
+
+  .post-content :global(li),
+  .post-excerpt :global(li) {
     margin-bottom: 0.5rem;
   }
 
-  .post-content :global(blockquote) {
+  .post-content :global(blockquote),
+  .post-excerpt :global(blockquote) {
     margin: 1rem 0;
-    padding: 0.5rem 1rem;
-    border-left: 3px solid var(--color-border);
+    padding: 0 1rem 0 1.5rem;
+    position: relative;
     color: var(--color-text-muted);
   }
 
-  .post-content :global(img) {
+  .post-content :global(blockquote)::before,
+  .post-excerpt :global(blockquote)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--color-border);
+  }
+
+  .post-content :global(img),
+  .post-excerpt :global(img) {
     max-width: 100%;
     height: auto;
     border-radius: 4px;

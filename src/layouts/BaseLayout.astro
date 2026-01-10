@@ -13,7 +13,7 @@ const { title, description = "Personal blog about Math, Philosophy, and Code" } 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/jpeg" href="/fav.jpg" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
     <title>{title}</title>
   </head>
@@ -23,14 +23,6 @@ const { title, description = "Personal blog about Math, Philosophy, and Code" } 
 </html>
 
 <style is:global>
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
   :root {
     --color-bg: #fafafa;
     --color-text: #333;
@@ -86,5 +78,22 @@ const { title, description = "Personal blog about Math, Philosophy, and Code" } 
   pre code {
     background: none;
     padding: 0;
+  }
+
+  blockquote {
+    margin: 1rem 0;
+    padding: 0 1rem 0 1.5rem;
+    position: relative;
+    color: var(--color-text-muted);
+  }
+
+  blockquote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--color-border);
   }
 </style>

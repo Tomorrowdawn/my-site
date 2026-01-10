@@ -3,31 +3,9 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import Nav from "@components/Nav.astro";
 import Profile from "@components/Profile.astro";
 import CategoryTabs from "@components/CategoryTabs.astro";
-import PostCard from "@components/PostCard.astro";
-import Pagination from "@components/Pagination.astro";
-import { getCollection } from "astro:content";
-
-const POSTS_PER_PAGE = 10;
 
 const url = new URL(Astro.request.url);
 const category = url.searchParams.get("category") || "all";
-const page = parseInt(url.searchParams.get("page") || "1");
-
-const allPosts = await getCollection("posts");
-
-const filteredPosts = category === "all"
-  ? allPosts
-  : allPosts.filter(post => post.data.tags.includes(category as any));
-
-const sortedPosts = filteredPosts.sort((a, b) => 
-  new Date(b.data.createdAt).getTime() - new Date(a.data.createdAt).getTime()
-);
-
-const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
-const startIndex = (page - 1) * POSTS_PER_PAGE;
-const paginatedPosts = sortedPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
-
-const baseUrl = category === "all" ? "/" : `/?category=${category}`;
 ---
 
 <BaseLayout title="Home | My Website">
@@ -35,24 +13,16 @@ const baseUrl = category === "all" ? "/" : `/?category=${category}`;
   <main class="container">
     <Profile />
     <section class="feed">
-      <CategoryTabs current={category} />
-      <div class="posts">
-        {paginatedPosts.length > 0 ? (
-          paginatedPosts.map(post => (
-            <PostCard
-              title={post.data.title}
-              slug={post.slug}
-              date={post.data.createdAt}
-              excerpt={post.data.excerpt}
-            />
-          ))
-        ) : (
-          <p class="no-posts">No posts found.</p>
-        )}
+      <div class="feed-panel">
+        <CategoryTabs current={category} />
+        <div class="posts">
+          <p class="loading">Loading posts...</p>
+        </div>
       </div>
-      <Pagination currentPage={page} totalPages={totalPages} baseUrl={baseUrl} />
+      <div class="pagination-container"></div>
     </section>
   </main>
+  <script src="../scripts/feedsManager.ts"></script>
 </BaseLayout>
 
 <style>
@@ -69,13 +39,111 @@ const baseUrl = category === "all" ? "/" : `/?category=${category}`;
     min-width: 0;
   }
 
+  .feed-panel {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+
   .posts {
+    margin-top: 1.25rem;
+  }
+
+  .loading,
+  :global(.no-posts) {
+    color: var(--color-text-muted);
+    padding: 2rem 0;
+  }
+
+  :global(.post-card) {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  :global(.post-card:last-child) {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  :global(.post-title) {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+
+  :global(.post-link) {
+    color: #0b0b0d;
+    text-decoration: none;
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+  }
+
+  :global(.post-link:hover) {
+    color: #0b172a;
+    text-decoration: none;
+  }
+
+  :global(.post-meta) {
+    color: rgba(55, 65, 81, 0.75);
+    font-size: 0.95rem;
+  }
+
+  :global(.post-excerpt) {
+    margin-top: 0.55rem;
+    line-height: 1.8;
+    color: rgba(15, 23, 42, 0.75);
+  }
+
+  :global(.post-footer) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+  }
+
+  :global(.read-more) {
+    color: rgba(59, 130, 246, 0.9);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  :global(.read-more:hover) {
+    color: rgba(37, 99, 235, 1);
+    text-decoration: underline;
+  }
+
+  :global(.pagination) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
     margin-top: 1rem;
   }
 
-  .no-posts {
+  :global(.page-link) {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text);
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  :global(.page-link:hover) {
+    background: var(--color-text);
+    color: white;
+    text-decoration: none;
+  }
+
+  :global(.page-info) {
     color: var(--color-text-muted);
-    padding: 2rem 0;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 768px) {

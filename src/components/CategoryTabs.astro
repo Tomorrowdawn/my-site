@@ -11,13 +11,17 @@ const categories = [
   { id: "philosophy", label: "Philosophy" },
   { id: "code", label: "Code" },
 ];
+
+const base = import.meta.env.DEV ? "" : "/my-website";
 ---
 
-<nav class="category-tabs">
+<nav class="category-tabs" aria-label="Post categories">
   {categories.map(cat => (
     <a 
-      href={cat.id === "all" ? "/" : `/?category=${cat.id}`}
+      href={cat.id === "all" ? `${base}/` : `${base}/?category=${cat.id}`}
       class:list={["tab", { active: current === cat.id }]}
+      aria-current={current === cat.id ? "page" : undefined}
+      data-feeds-link
     >
       {cat.label}
     </a>
@@ -27,36 +31,64 @@ const categories = [
 <style>
   .category-tabs {
     display: flex;
-    gap: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    align-items: flex-end;
+    padding-bottom: 0.5rem;
     margin-bottom: 1rem;
   }
 
   .tab {
-    color: var(--color-text-muted);
-    font-size: 1rem;
-    padding-bottom: 0.5rem;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.25rem;
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .tab::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scaleX(0);
+    transform-origin: center;
   }
 
   .tab:hover {
-    color: var(--color-text);
-    text-decoration: none;
+    color: #334155;
+  }
+
+  .tab:hover::before {
+    background: #cbd5e1;
+    transform: scaleX(1);
   }
 
   .tab.active {
-    color: var(--color-text);
-    font-weight: 600;
+    color: #0f172a;
   }
 
-  .tab.active::after {
-    content: "";
-    position: absolute;
-    bottom: -1rem;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--color-text);
+  .tab.active::before {
+    background: #0f172a;
+    transform: scaleX(1);
+    height: 3px;
+  }
+
+  .tab:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 4px;
+    border-radius: 2px;
   }
 </style>
+
