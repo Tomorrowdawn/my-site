@@ -12,6 +12,15 @@ interface CategoryData {
   postsPerPage: number;
 }
 
+interface CachedData {
+  data: CategoryData;
+  timestamp: number;
+}
+
+const CACHE_VERSION = "v1";
+const CACHE_PREFIX = `feeds-cache-${CACHE_VERSION}-`;
+const CACHE_EXPIRY_MS = 24 * 60 * 60 * 1000; // 24 hours
+
 class FeedsManager {
   private cache = new Map<string, CategoryData>();
   private currentCategory = "all";
@@ -19,6 +28,8 @@ class FeedsManager {
   private postsPerPage = 10;
 
   async init() {
+    this.cleanupExpiredCache();
+
     const url = new URL(window.location.href);
     this.currentCategory = url.searchParams.get("category") || "all";
     this.currentPage = parseInt(url.searchParams.get("page") || "1");
@@ -29,16 +40,93 @@ class FeedsManager {
     window.addEventListener("popstate", () => this.handlePopState());
   }
 
+  private cleanupExpiredCache(): void {
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(CACHE_PREFIX)) {
+          try {
+            const item = localStorage.getItem(key);
+            if (item) {
+              const cachedData: CachedData = JSON.parse(item);
+              const age = Date.now() - cachedData.timestamp;
+              if (age > CACHE_EXPIRY_MS) {
+                localStorage.removeItem(key);
+              }
+            }
+          } catch (error) {
+            // 如果解析失败，删除无效的缓存项
+            localStorage.removeItem(key);
+          }
+        }
+      }
+    } catch (error) {
+      // localStorage 可能不可用，静默失败
+      console.warn("Failed to cleanup expired cache:", error);
+    }
+  }
+
+  private getCachedData(category: string): CategoryData | null {
+    try {
+      const key = `${CACHE_PREFIX}${category}`;
+      const item = localStorage.getItem(key);
+      if (!item) return null;
+
+      const cachedData: CachedData = JSON.parse(item);
+      const age = Date.now() - cachedData.timestamp;
+
+      if (age > CACHE_EXPIRY_MS) {
+        // 缓存过期，删除
+        localStorage.removeItem(key);
+        return null;
+      }
+
+      return cachedData.data;
+    } catch (error) {
+      // 如果解析失败或 localStorage 不可用，返回 null
+      console.warn("Failed to get cached data:", error);
+      return null;
+    }
+  }
+
+  private setCachedData(category: string, data: CategoryData): void {
+    try {
+      const key = `${CACHE_PREFIX}${category}`;
+      const cachedData: CachedData = {
+        data,
+        timestamp: Date.now(),
+      };
+      localStorage.setItem(key, JSON.stringify(cachedData));
+    } catch (error) {
+      // localStorage 可能已满或不可用，静默失败
+      console.warn("Failed to set cached data:", error);
+    }
+  }
+
   private async loadCategory(category: string): Promise<CategoryData> {
+    // 1. 检查内存缓存
     if (this.cache.has(category)) {
       return this.cache.get(category)!;
     }
 
+    // 2. 检查 localStorage 缓存
+    const cachedData = this.getCachedData(category);
+    if (cachedData) {
+      // 存入内存缓存以便下次快速访问
+      this.cache.set(category, cachedData);
+      return cachedData;
+    }
+
+    // 3. 从服务器获取
     const base = import.meta.env.BASE_URL || "/";
     const normalizedBase = base.endsWith("/") ? base : `${base}/`;
     const response = await fetch(`${normalizedBase}data/posts-${category}.json`);
     const data: CategoryData = await response.json();
+
+    // 4. 更新缓存
     this.cache.set(category, data);
+    this.setCachedData(category, data);
+
     return data;
   }
 
