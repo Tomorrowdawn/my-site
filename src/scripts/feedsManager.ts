@@ -163,6 +163,8 @@ class FeedsManager {
       if (!link || !(link instanceof HTMLAnchorElement)) return;
 
       e.preventDefault();
+
+      // 解析链接的路径和搜索参数，避免重复添加 base 路径
       const url = new URL(link.href);
       const newCategory = url.searchParams.get("category") || "all";
       const newPage = parseInt(url.searchParams.get("page") || "1");
@@ -174,7 +176,8 @@ class FeedsManager {
         this.currentPage = newPage;
       }
 
-      window.history.pushState({}, "", url);
+      // 构建正确的相对路径，使用 link.getAttribute('href') 而不是完整 URL
+      window.history.pushState({}, "", link.getAttribute('href'));
       this.loadAndRender();
     });
   }
