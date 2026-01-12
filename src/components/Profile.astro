@@ -5,30 +5,61 @@ interface Props {
   bio?: string;
 }
 
-const { 
+interface LinkItem {
+  icon: "github" | "zhihu";
+  url: string;
+  label: string;
+}
+
+interface SvgIcons {
+  github: string;
+  zhihu: string;
+}
+
+const {
   avatar = "/avatar.jpg",
-  name = "TomorrowDawn",
-  bio = "Math, Philosophy, Code."
+  name = "TomorrowDawn"
 } = Astro.props;
 
-const links = [
-  { icon: "twitter", url: "https://twitter.com/", label: "Twitter" },
-  { icon: "github", url: "https://github.com/tomorrowdawn", label: "GitHub" },
-  { icon: "linkedin", url: "https://linkedin.com/", label: "LinkedIn" },
+
+const links: LinkItem[] = [
+  {
+    icon: "github",
+    url: "https://github.com/tomorrowdawn",
+    label: "GitHub"
+  },
+  {
+    icon: "zhihu",
+    url: "https://www.zhihu.com/people/68-45-38-52",
+    label: "知乎"
+  },
 ];
+
+const svgIcons: SvgIcons = {
+  github: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+  </svg>`,
+  zhihu: `<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="font-family: sans-serif;">
+    <text x="12" y="14" text-anchor="middle" font-size="14" font-weight="bold">知</text>
+  </svg>`,
+};
 ---
 
 <aside class="profile">
   <div class="avatar">
     <img src={avatar} alt={name} />
   </div>
-  <p class="bio">{bio}</p>
+  <div class="bio">
+    <p set:html={`If you <i>don't have time</i> to do something, it's actually that you <b>don't want</b> to do it.`} />
+    <p set:html={`If you <i>don't know what</i> to do, you're actually doing <b>anxiety</b>.`} />
+    <p set:html={`If you don't know when you can announce to others "<i>I'm done, goodbye</i>", then you'll either <b>never start or never finish</b>.`} />
+  </div>
   <div class="links">
     <h4>Links</h4>
     <div class="link-icons">
       {links.map(link => (
         <a href={link.url} target="_blank" rel="noopener noreferrer" title={link.label}>
-          <span class="icon">{link.icon[0].toUpperCase()}</span>
+          <span set:html={svgIcons[link.icon]} />
         </a>
       ))}
     </div>
@@ -66,6 +97,23 @@ const links = [
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .bio p {
+    margin: 0.75rem 0;
+  }
+
+  .bio p:first-child {
+    margin-top: 0;
+  }
+
+  .bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .bio i {
+    font-style: italic;
   }
 
   .links h4 {
@@ -99,8 +147,9 @@ const links = [
     text-decoration: none;
   }
 
-  .icon {
-    font-size: 0.8rem;
-    font-weight: 600;
+  .link-icons svg {
+    width: 20px;
+    height: 20px;
   }
+
 </style>
