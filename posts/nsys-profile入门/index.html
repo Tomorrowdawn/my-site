@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="唐晨夏的个人博客"><meta name="author" content="唐晨夏 (Chenxia Tang)"><link rel="icon" type="image/jpeg" href="/fav.jpg"><link rel="canonical" href="https://blog.tomorrowdawn.cc/posts/nsys-profile%E5%85%A5%E9%97%A8"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><!-- Open Graph --><meta property="og:title" content="nsys profile入门 | 唐晨夏的博客"><meta property="og:description" content="唐晨夏的个人博客"><meta property="og:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><meta property="og:url" content="https://blog.tomorrowdawn.cc/posts/nsys-profile%E5%85%A5%E9%97%A8"><meta property="og:type" content="article"><meta property="og:site_name" content="唐晨夏的博客"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="nsys profile入门 | 唐晨夏的博客"><meta name="twitter:description" content="唐晨夏的个人博客"><meta name="twitter:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"唐晨夏的博客","url":"https://blog.tomorrowdawn.cc","author":{"@id":"https://blog.tomorrowdawn.cc/#person"}},{"@type":"Person","@id":"https://blog.tomorrowdawn.cc/#person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc","sameAs":["https://github.com/TomorrowDAW","https://www.zhihu.com/people/tang-chen-xia-48"]}]}</script><title>nsys profile入门 | 唐晨夏的博客</title> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"nsys profile入门","datePublished":"2025-09-04","author":{"@type":"Person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc"},"image":"https://blog.tomorrowdawn.cc/avatar.jpg","url":"https://blog.tomorrowdawn.cc/posts/nsys-profile入门"}</script> <style>:root{--color-bg: #fafafa;--color-text: #333;--color-text-muted: #666;--color-border: #e0e0e0;--color-accent: #333;--color-link: #2563eb;--color-link-hover: #1d4ed8;--font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;--max-width: 1200px;--sidebar-width: 280px}html{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--color-text);background:var(--color-bg)}body{min-height:100vh}a{color:var(--color-link);text-decoration:none;transition:color .15s ease}a:hover{color:var(--color-link-hover);text-decoration:underline}code{font-family:var(--font-mono);font-size:.9em;background:#f0f0f0;padding:.1em .3em;border-radius:3px}pre{background:#f5f5f5;padding:1rem;border-radius:4px;overflow-x:auto}pre code{background:none;padding:0}blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.nav[data-astro-cid-dmqpwcec]{border-bottom:1px solid rgba(15,23,42,.1);background:var(--color-bg)}.nav-content[data-astro-cid-dmqpwcec]{max-width:var(--max-width);margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.nav-links[data-astro-cid-dmqpwcec]{display:flex;gap:1.5rem}.nav-link[data-astro-cid-dmqpwcec]{color:#555;font-size:.95rem;font-weight:500;transition:color .2s ease}.nav-link[data-astro-cid-dmqpwcec]:hover{color:#111;text-decoration:none}.nav-title[data-astro-cid-dmqpwcec]{font-size:1.35rem;font-weight:700;letter-spacing:.04em;color:#111;font-family:Space Grotesk,Inter,system-ui,sans-serif}.nav-title[data-astro-cid-dmqpwcec]:hover{text-decoration:none}
+.container[data-astro-cid-gysqo7gh]{max-width:800px;margin:0 auto;padding:2rem}.post-header[data-astro-cid-gysqo7gh]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}.post-header[data-astro-cid-gysqo7gh] h1[data-astro-cid-gysqo7gh]{font-size:2rem;line-height:1.3;margin-bottom:1rem}.post-meta[data-astro-cid-gysqo7gh]{display:flex;align-items:center;gap:1rem;color:var(--color-text-muted);font-size:.9rem}.tags[data-astro-cid-gysqo7gh]{display:flex;gap:.5rem}.tag[data-astro-cid-gysqo7gh]{padding:.2rem .6rem;background:#f0f0f0;border-radius:3px;font-size:.8rem}.post-content[data-astro-cid-gysqo7gh]{line-height:1.8}.post-content[data-astro-cid-gysqo7gh] h2,.post-excerpt[data-astro-cid-gysqo7gh] h2{font-size:1.5rem;margin:2rem 0 1rem}.post-content[data-astro-cid-gysqo7gh] h3,.post-excerpt[data-astro-cid-gysqo7gh] h3{font-size:1.25rem;margin:1.5rem 0 .75rem}.post-content[data-astro-cid-gysqo7gh] p,.post-excerpt[data-astro-cid-gysqo7gh] p{margin-bottom:1rem}.post-content[data-astro-cid-gysqo7gh] ul,.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ol{margin-bottom:1rem;padding-left:1.5rem}.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ol{list-style-type:decimal}.post-content[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ul{list-style-type:disc}.post-content[data-astro-cid-gysqo7gh] li,.post-excerpt[data-astro-cid-gysqo7gh] li{margin-bottom:.5rem}.post-content[data-astro-cid-gysqo7gh] blockquote,.post-excerpt[data-astro-cid-gysqo7gh] blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}.post-content[data-astro-cid-gysqo7gh] blockquote:before,.post-excerpt[data-astro-cid-gysqo7gh] blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.post-content[data-astro-cid-gysqo7gh] img,.post-excerpt[data-astro-cid-gysqo7gh] img{max-width:100%;height:auto;border-radius:4px}
+</style></head> <body>   <nav class="nav" data-astro-cid-dmqpwcec> <div class="nav-content" data-astro-cid-dmqpwcec> <a href="/" class="nav-title" data-astro-cid-dmqpwcec>Tomorrowdawn's Blog</a> <div class="nav-links" data-astro-cid-dmqpwcec> <a href="/about" class="nav-link" data-astro-cid-dmqpwcec>About</a> </div> </div> </nav>  <main class="container" data-astro-cid-gysqo7gh> <article class="post" data-astro-cid-gysqo7gh> <header class="post-header" data-astro-cid-gysqo7gh> <h1 data-astro-cid-gysqo7gh>nsys profile入门</h1> <div class="post-meta" data-astro-cid-gysqo7gh> <time datetime="2025-09-04" data-astro-cid-gysqo7gh>2025-09-04</time> <div class="tags" data-astro-cid-gysqo7gh> <span class="tag" data-astro-cid-gysqo7gh>math</span><span class="tag" data-astro-cid-gysqo7gh>code</span> </div> </div> </header> <div class="post-content" data-astro-cid-gysqo7gh> <p>这篇文章记录了我是用nsys profile的一些踩坑点。</p>
+<p>首先需要知道profile的大致流程。首先在目标平台编译，运行，然后在主机平台上阅读report. 简单来说，就是在服务器上跑出report之后，下载到本地读。</p>
+<p>本地和远程都需要配置 nsight compute . 照着官网配就好了。 <a href="https://link.zhihu.com/?target=https%3A//developer.nvidia.com/nsight-compute">https://developer.nvidia.com/nsight-compute</a></p>
+<p>基础：</p>
+<p><img alt="image" loading="lazy" decoding="async" fetchpriority="auto" width="1322" height="464" src="/_astro/v2-8a25b9ca224284f541bb563eaa27cecd_r.C0m59fds_1zcVdP.webp" ></p>
+<p>这里需要特别强调-arch参数。如果不使用这个参数，nvcc只会生成一个中间代码（PTX），真正运行时将变成JIT compile,  导致profile里面的数据无意义，无法追踪具体的内核启动情况。查询arch参数就是上官网查显卡型号，然后会有一个compute capability, 比如说我用的A6000是8.6，那么就是sm_86。</p>
+<p>这种情况下生成的profile只能看到简略的执行时间，看不到内部细节。为了达到这一点，需要使用gpu-metrics-device（注意，某些版本是gpu-metrics-devices, 需要根据自己nsys版本去调。多用—help）控制; 而使用这个符号必须使用sudo启动nsys, 因为访问显卡寄存器资源需要特权。</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>sudo nsys profile --gpu-metrics-device=1 -o output &#x3C;your_obj></span></span></code></pre>
+<p>特别注意这个profile可能和 DCGM 冲突：</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//forums.developer.nvidia.com/t/nsys-profile-gpu-metrics-devices-fails-with-already-under-profiling/333938/12">https://forums.developer.nvidia.com/t/nsys-profile-gpu-metrics-devices-fails-with-already-under-profiling/333938/12forums.developer.nvidia.com/t/nsys-profile-gpu-metrics-devices-fails-with-already-under-profiling/333938/12</a></p>
+<p>这种情况下得到的输出截图如下：</p>
+<p><img alt="image" loading="lazy" decoding="async" fetchpriority="auto" width="2352" height="1339" src="/_astro/v2-aa01b104bed3784ae9423f10ece4b39e_r.CtHJfjOH_ZBkrr1.webp" ></p>
+<p>我们可以看到SM启动率，DRAM（也就是HBM）带宽等信息。注意nsys 读不到HBM的读写次数（或者说读写数据量），这个需要上NCU分析。因此nsys只适合定位瓶颈不适合改进内核。</p>
+<p>这里我启动了两个矩阵乘内核进行对比：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>#include &#x3C;cuda_runtime.h></span></span>
+<span class="line"><span>#include &#x3C;stdio.h></span></span>
+<span class="line"><span>#include &#x3C;stdlib.h></span></span>
+<span class="line"><span>#include &#x3C;math.h></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>#define MATRIX_SIZE 4096</span></span>
+<span class="line"><span>#define BLOCK_SIZE 32</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Simple matrix multiplication kernel (naive implementation)</span></span>
+<span class="line"><span>__global__ void matrixMulNaive(float *A, float *B, float *C, int N) {</span></span>
+<span class="line"><span>    int row = blockIdx.y * blockDim.y + threadIdx.y;</span></span>
+<span class="line"><span>    int col = blockIdx.x * blockDim.x + threadIdx.x;</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    if (row &#x3C; N &#x26;&#x26; col &#x3C; N) {</span></span>
+<span class="line"><span>        float sum = 0.0f;</span></span>
+<span class="line"><span>        for (int k = 0; k &#x3C; N; k++) {</span></span>
+<span class="line"><span>            sum += A[row * N + k] * B[k * N + col];</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        C[row * N + col] = sum;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Optimized matrix multiplication with shared memory</span></span>
+<span class="line"><span>__global__ void matrixMulShared(float *A, float *B, float *C, int N) {</span></span>
+<span class="line"><span>    __shared__ float As[BLOCK_SIZE][BLOCK_SIZE];</span></span>
+<span class="line"><span>    __shared__ float Bs[BLOCK_SIZE][BLOCK_SIZE];</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    int bx = blockIdx.x, by = blockIdx.y;</span></span>
+<span class="line"><span>    int tx = threadIdx.x, ty = threadIdx.y;</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    int row = by * BLOCK_SIZE + ty;</span></span>
+<span class="line"><span>    int col = bx * BLOCK_SIZE + tx;</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    float sum = 0.0f;</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    for (int m = 0; m &#x3C; (N + BLOCK_SIZE - 1) / BLOCK_SIZE; m++) {</span></span>
+<span class="line"><span>        // Load tiles into shared memory</span></span>
+<span class="line"><span>        if (row &#x3C; N &#x26;&#x26; m * BLOCK_SIZE + tx &#x3C; N)</span></span>
+<span class="line"><span>            As[ty][tx] = A[row * N + m * BLOCK_SIZE + tx];</span></span>
+<span class="line"><span>        else</span></span>
+<span class="line"><span>            As[ty][tx] = 0.0f;</span></span>
+<span class="line"><span>            </span></span>
+<span class="line"><span>        if (col &#x3C; N &#x26;&#x26; m * BLOCK_SIZE + ty &#x3C; N)</span></span>
+<span class="line"><span>            Bs[ty][tx] = B[(m * BLOCK_SIZE + ty) * N + col];</span></span>
+<span class="line"><span>        else</span></span>
+<span class="line"><span>            Bs[ty][tx] = 0.0f;</span></span>
+<span class="line"><span>            </span></span>
+<span class="line"><span>        __syncthreads();</span></span>
+<span class="line"><span>        </span></span>
+<span class="line"><span>        // Compute partial dot product</span></span>
+<span class="line"><span>        for (int k = 0; k &#x3C; BLOCK_SIZE; k++) {</span></span>
+<span class="line"><span>            sum += As[ty][k] * Bs[k][tx];</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        </span></span>
+<span class="line"><span>        __syncthreads();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    if (row &#x3C; N &#x26;&#x26; col &#x3C; N) {</span></span>
+<span class="line"><span>        C[row * N + col] = sum;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// CPU reference implementation</span></span>
+<span class="line"><span>void matrixMulCPU(float *A, float *B, float *C, int N) {</span></span>
+<span class="line"><span>    for (int i = 0; i &#x3C; N; i++) {</span></span>
+<span class="line"><span>        for (int j = 0; j &#x3C; N; j++) {</span></span>
+<span class="line"><span>            float sum = 0.0f;</span></span>
+<span class="line"><span>            for (int k = 0; k &#x3C; N; k++) {</span></span>
+<span class="line"><span>                sum += A[i * N + k] * B[k * N + j];</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            C[i * N + j] = sum;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>int main() {</span></span>
+<span class="line"><span>    // 强制设置使用GPU设备7</span></span>
+<span class="line"><span>    cudaSetDevice(7);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // 验证设备设置</span></span>
+<span class="line"><span>    int device;</span></span>
+<span class="line"><span>    cudaGetDevice(&#x26;device);</span></span>
+<span class="line"><span>    printf("当前使用的GPU设备: %d\n", device);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    printf("矩阵乘法Profiling示例\n");</span></span>
+<span class="line"><span>    printf("矩阵大小: %dx%d\n", MATRIX_SIZE, MATRIX_SIZE);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    size_t size = MATRIX_SIZE * MATRIX_SIZE * sizeof(float);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // Host memory allocation</span></span>
+<span class="line"><span>    float *h_A = (float*)malloc(size);</span></span>
+<span class="line"><span>    float *h_B = (float*)malloc(size);</span></span>
+<span class="line"><span>    float *h_C_naive = (float*)malloc(size);</span></span>
+<span class="line"><span>    float *h_C_shared = (float*)malloc(size);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // Initialize matrices</span></span>
+<span class="line"><span>    for (int i = 0; i &#x3C; MATRIX_SIZE * MATRIX_SIZE; i++) {</span></span>
+<span class="line"><span>        h_A[i] = rand() / (float)RAND_MAX;</span></span>
+<span class="line"><span>        h_B[i] = rand() / (float)RAND_MAX;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // Device memory allocation</span></span>
+<span class="line"><span>    float *d_A, *d_B, *d_C;</span></span>
+<span class="line"><span>    cudaMalloc(&#x26;d_A, size);</span></span>
+<span class="line"><span>    cudaMalloc(&#x26;d_B, size);</span></span>
+<span class="line"><span>    cudaMalloc(&#x26;d_C, size);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // Copy input data to device</span></span>
+<span class="line"><span>    cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);</span></span>
+<span class="line"><span>    cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // Setup grid and block dimensions</span></span>
+<span class="line"><span>    dim3 blockDim(BLOCK_SIZE, BLOCK_SIZE);</span></span>
+<span class="line"><span>    dim3 gridDim((MATRIX_SIZE + BLOCK_SIZE - 1) / BLOCK_SIZE, </span></span>
+<span class="line"><span>                 (MATRIX_SIZE + BLOCK_SIZE - 1) / BLOCK_SIZE);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    printf("Grid: %dx%d, Block: %dx%d\n", </span></span>
+<span class="line"><span>           gridDim.x, gridDim.y, blockDim.x, blockDim.y);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // === 测试1: Naive矩阵乘法 ===</span></span>
+<span class="line"><span>    printf("\n=== 运行Naive矩阵乘法 ===\n");</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    cudaEvent_t start_naive, stop_naive;</span></span>
+<span class="line"><span>    cudaEventCreate(&#x26;start_naive);</span></span>
+<span class="line"><span>    cudaEventCreate(&#x26;stop_naive);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    cudaEventRecord(start_naive);</span></span>
+<span class="line"><span>    matrixMulNaive&#x3C;&#x3C;&#x3C;gridDim, blockDim>>>(d_A, d_B, d_C, MATRIX_SIZE);</span></span>
+<span class="line"><span>    cudaEventRecord(stop_naive);</span></span>
+<span class="line"><span>    cudaEventSynchronize(stop_naive);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    float time_naive;</span></span>
+<span class="line"><span>    cudaEventElapsedTime(&#x26;time_naive, start_naive, stop_naive);</span></span>
+<span class="line"><span>    printf("Naive实现执行时间: %.2f ms\n", time_naive);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    cudaMemcpy(h_C_naive, d_C, size, cudaMemcpyDeviceToHost);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // === 测试2: Shared Memory优化的矩阵乘法 ===</span></span>
+<span class="line"><span>    printf("\n=== 运行Shared Memory优化矩阵乘法 ===\n");</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    cudaEvent_t start_shared, stop_shared;</span></span>
+<span class="line"><span>    cudaEventCreate(&#x26;start_shared);</span></span>
+<span class="line"><span>    cudaEventCreate(&#x26;stop_shared);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    cudaEventRecord(start_shared);</span></span>
+<span class="line"><span>    matrixMulShared&#x3C;&#x3C;&#x3C;gridDim, blockDim>>>(d_A, d_B, d_C, MATRIX_SIZE);</span></span>
+<span class="line"><span>    cudaEventRecord(stop_shared);</span></span>
+<span class="line"><span>    cudaEventSynchronize(stop_shared);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    float time_shared;</span></span>
+<span class="line"><span>    cudaEventElapsedTime(&#x26;time_shared, start_shared, stop_shared);</span></span>
+<span class="line"><span>    printf("Shared Memory实现执行时间: %.2f ms\n", time_shared);</span></span>
+<span class="line"><span>    printf("性能提升: %.2fx\n", time_naive / time_shared);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    cudaMemcpy(h_C_shared, d_C, size, cudaMemcpyDeviceToHost);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // Simple verification (check a few random elements)</span></span>
+<span class="line"><span>    bool success = true;</span></span>
+<span class="line"><span>    for (int i = 0; i &#x3C; 10; i++) {</span></span>
+<span class="line"><span>        int idx = rand() % (MATRIX_SIZE * MATRIX_SIZE);</span></span>
+<span class="line"><span>        if (abs(h_C_naive[idx] - h_C_shared[idx]) > 1e-3) {</span></span>
+<span class="line"><span>            success = false;</span></span>
+<span class="line"><span>            break;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    printf("结果验证: %s\n", success ? "通过" : "失败");</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // Cleanup</span></span>
+<span class="line"><span>    free(h_A); free(h_B); free(h_C_naive); free(h_C_shared);</span></span>
+<span class="line"><span>    cudaFree(d_A); cudaFree(d_B); cudaFree(d_C);</span></span>
+<span class="line"><span>    cudaEventDestroy(start_naive); cudaEventDestroy(stop_naive);</span></span>
+<span class="line"><span>    cudaEventDestroy(start_shared); cudaEventDestroy(stop_shared);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    return 0;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>简单来说，第一个内核就是简单的逐点计算点乘，第二个内核则使用了Shared Memory进行优化。代码中检测到的加速比大概是1.3x. 我们先来看看第一个内核的nsys</p>
+<h2 id="熟悉指标">熟悉指标</h2>
+<blockquote>
+<p>sudo nsys profile —gpu-metrics-device=7 -o mm_profile mm</p>
+</blockquote>
+<p><img alt="image" loading="lazy" decoding="async" fetchpriority="auto" width="1612" height="1044" src="/_astro/v2-099cec0b5737cc559f97612d05a4111f_r.Cazsb178_Z1LOPzv.webp" ></p>
+<p>主要指标如下：</p>
+<p>GPU active: GPU活跃度，意义不是很大。这个指标展开内部可以看到copy/GR活跃度，有助于你判断瓶颈在传输还是计算（注意这个只能判断主机-GPU，没法判断内核）, 不如直接看warp/SM相关指标</p>
+<p>Compute in Flight: 显示计算队列的繁忙程度。这是通过GPU采样计算的，算的是采样次数中有多少次该队列繁忙。一个很弱的指标。</p>
+<p>SM Active：有多少SM <strong>至少有一个WARP在运行。</strong></p>
+<p>SM Issue：一个关键指标。这个指标衡量的是 SM 内部的指令发射单元的繁忙程度。(The ratio of cycles that SM sub-partitions (warp schedulers) issued an instruction to the number of cycles in the sample period as a percentage）</p>
+<p>如图所示，这个值非常低，说明计算单元执行的指令很少，没有吃满计算资源。 <strong>该值低的直接原因是正在执行的WARP很少；常见于grid/block开小了没吃满硬件资源，或者WARP被访存卡住了。</strong></p>
+<p>SM Warp Occupancy: 活跃的WARP数比SM最大warp数。这个值和上面的SM Issue互相印证。在图中，SWO只有67%。</p>
+<blockquote>
+<p>本来打算算一下理论吞吐的，但是发现nsys没有device attributes, 再研究一下。</p>
+</blockquote>
+<p>DRAM: 这就是常说的HBM带宽。nsys只能看到带宽，数据读写量需要靠ncu分析。因此意义虽然有一点儿但不大。</p>
+<h3 id="对比">对比</h3>
+<p>这里有一个非常有意思的现象（第一段是naive, 第二段上了shared mem优化）：</p>
+<p><img alt="image" loading="lazy" decoding="async" fetchpriority="auto" width="2407" height="1235" src="/_astro/v2-c1e155ca804d55acb5537458eb113de1_r.DiakAqnF_1OHF6P.webp" ></p>
+<p>共享内存版本的SM Issue <strong>低于</strong> 普通版本， <strong>但是更快</strong></p>
+<p>这个现象很有趣，欢迎评论区的大伙指导一下（</p>
+<p>经过一段时间的挖掘，很可能和 <code>__syncthreads()</code> 有关。见 <a href="https://link.zhihu.com/?target=https%3A//docs.nvidia.com/gameworks/content/developertools/desktop/analysis/report/cudaexperiments/kernellevel/issueefficiency.htm%23Background">Issue Efficiency</a></p>
+<blockquote>
+<p>顺带一提我和gemini-2.5-pro辩论了半个多小时也没搞清楚这个问题，这个同步问题还是我自己发现的。 它不知为何非常执着于告诉我naive kernel会调度warp来掩盖时延，我寻思难道shared就不了？</p>
+</blockquote> </div> </article> </main>  </body></html> 

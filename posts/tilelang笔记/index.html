@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="唐晨夏的个人博客"><meta name="author" content="唐晨夏 (Chenxia Tang)"><link rel="icon" type="image/jpeg" href="/fav.jpg"><link rel="canonical" href="https://blog.tomorrowdawn.cc/posts/tilelang%E7%AC%94%E8%AE%B0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><!-- Open Graph --><meta property="og:title" content="TileLang笔记 | 唐晨夏的博客"><meta property="og:description" content="唐晨夏的个人博客"><meta property="og:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><meta property="og:url" content="https://blog.tomorrowdawn.cc/posts/tilelang%E7%AC%94%E8%AE%B0"><meta property="og:type" content="article"><meta property="og:site_name" content="唐晨夏的博客"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="TileLang笔记 | 唐晨夏的博客"><meta name="twitter:description" content="唐晨夏的个人博客"><meta name="twitter:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"唐晨夏的博客","url":"https://blog.tomorrowdawn.cc","author":{"@id":"https://blog.tomorrowdawn.cc/#person"}},{"@type":"Person","@id":"https://blog.tomorrowdawn.cc/#person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc","sameAs":["https://github.com/TomorrowDAW","https://www.zhihu.com/people/tang-chen-xia-48"]}]}</script><title>TileLang笔记 | 唐晨夏的博客</title> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"TileLang笔记","datePublished":"2025-12-29","author":{"@type":"Person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc"},"image":"https://blog.tomorrowdawn.cc/avatar.jpg","url":"https://blog.tomorrowdawn.cc/posts/tilelang笔记"}</script> <style>:root{--color-bg: #fafafa;--color-text: #333;--color-text-muted: #666;--color-border: #e0e0e0;--color-accent: #333;--color-link: #2563eb;--color-link-hover: #1d4ed8;--font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;--max-width: 1200px;--sidebar-width: 280px}html{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--color-text);background:var(--color-bg)}body{min-height:100vh}a{color:var(--color-link);text-decoration:none;transition:color .15s ease}a:hover{color:var(--color-link-hover);text-decoration:underline}code{font-family:var(--font-mono);font-size:.9em;background:#f0f0f0;padding:.1em .3em;border-radius:3px}pre{background:#f5f5f5;padding:1rem;border-radius:4px;overflow-x:auto}pre code{background:none;padding:0}blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.nav[data-astro-cid-dmqpwcec]{border-bottom:1px solid rgba(15,23,42,.1);background:var(--color-bg)}.nav-content[data-astro-cid-dmqpwcec]{max-width:var(--max-width);margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.nav-links[data-astro-cid-dmqpwcec]{display:flex;gap:1.5rem}.nav-link[data-astro-cid-dmqpwcec]{color:#555;font-size:.95rem;font-weight:500;transition:color .2s ease}.nav-link[data-astro-cid-dmqpwcec]:hover{color:#111;text-decoration:none}.nav-title[data-astro-cid-dmqpwcec]{font-size:1.35rem;font-weight:700;letter-spacing:.04em;color:#111;font-family:Space Grotesk,Inter,system-ui,sans-serif}.nav-title[data-astro-cid-dmqpwcec]:hover{text-decoration:none}
+.container[data-astro-cid-gysqo7gh]{max-width:800px;margin:0 auto;padding:2rem}.post-header[data-astro-cid-gysqo7gh]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}.post-header[data-astro-cid-gysqo7gh] h1[data-astro-cid-gysqo7gh]{font-size:2rem;line-height:1.3;margin-bottom:1rem}.post-meta[data-astro-cid-gysqo7gh]{display:flex;align-items:center;gap:1rem;color:var(--color-text-muted);font-size:.9rem}.tags[data-astro-cid-gysqo7gh]{display:flex;gap:.5rem}.tag[data-astro-cid-gysqo7gh]{padding:.2rem .6rem;background:#f0f0f0;border-radius:3px;font-size:.8rem}.post-content[data-astro-cid-gysqo7gh]{line-height:1.8}.post-content[data-astro-cid-gysqo7gh] h2,.post-excerpt[data-astro-cid-gysqo7gh] h2{font-size:1.5rem;margin:2rem 0 1rem}.post-content[data-astro-cid-gysqo7gh] h3,.post-excerpt[data-astro-cid-gysqo7gh] h3{font-size:1.25rem;margin:1.5rem 0 .75rem}.post-content[data-astro-cid-gysqo7gh] p,.post-excerpt[data-astro-cid-gysqo7gh] p{margin-bottom:1rem}.post-content[data-astro-cid-gysqo7gh] ul,.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ol{margin-bottom:1rem;padding-left:1.5rem}.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ol{list-style-type:decimal}.post-content[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ul{list-style-type:disc}.post-content[data-astro-cid-gysqo7gh] li,.post-excerpt[data-astro-cid-gysqo7gh] li{margin-bottom:.5rem}.post-content[data-astro-cid-gysqo7gh] blockquote,.post-excerpt[data-astro-cid-gysqo7gh] blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}.post-content[data-astro-cid-gysqo7gh] blockquote:before,.post-excerpt[data-astro-cid-gysqo7gh] blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.post-content[data-astro-cid-gysqo7gh] img,.post-excerpt[data-astro-cid-gysqo7gh] img{max-width:100%;height:auto;border-radius:4px}
+</style></head> <body>   <nav class="nav" data-astro-cid-dmqpwcec> <div class="nav-content" data-astro-cid-dmqpwcec> <a href="/" class="nav-title" data-astro-cid-dmqpwcec>Tomorrowdawn's Blog</a> <div class="nav-links" data-astro-cid-dmqpwcec> <a href="/about" class="nav-link" data-astro-cid-dmqpwcec>About</a> </div> </div> </nav>  <main class="container" data-astro-cid-gysqo7gh> <article class="post" data-astro-cid-gysqo7gh> <header class="post-header" data-astro-cid-gysqo7gh> <h1 data-astro-cid-gysqo7gh>TileLang笔记</h1> <div class="post-meta" data-astro-cid-gysqo7gh> <time datetime="2025-12-29" data-astro-cid-gysqo7gh>2025-12-29</time> <div class="tags" data-astro-cid-gysqo7gh> <span class="tag" data-astro-cid-gysqo7gh>code</span><span class="tag" data-astro-cid-gysqo7gh>philosophy</span> </div> </div> </header> <div class="post-content" data-astro-cid-gysqo7gh> <p>这篇文章只是一篇碎碎念笔记，防止我很快就忘了之前看过什么。</p>
+<p>你将会看到一篇文章里面：</p>
+<ol>
+<li>说梦话</li>
+<li>前后左右脑互搏</li>
+<li>无限碎碎念</li>
+</ol>
+<p>这些都是刻意为之，为了保留我的思考痕迹。在这一点上，我很讨厌高斯先生的狐狸做派。</p>
+<blockquote>
+<p>实际上写这篇笔记时我只是翻来覆去阅读了tilelang那不算太好的文档</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//tilelang.com/programming_guides/language_basics.html">https://tilelang.com/programming_guides/language_basics.html</a></p>
+<p>这算不上符合</p>
+<p><a href="https://zhuanlan.zhihu.com/p/1988012490630648734">具体一点，再具体一点</a></p>
+<p>中所描述的哲学。实际上我缺乏一个明确的目标和停止点。</p>
+<p>不过倒也可以考虑一下。我的当前状态是GPU没那么好申请，不是很好直接跑程序。而且，就算跑程序，跑出来又有什么意义呢？我想了一下，关键在于我是否能建立对tilelang的概念的可靠信念，其期望结果是：当我遇到一个新的高性能需求时，可以使用tilelang完整编写，达到 1. 数值准确度（这衡量了我是否准确理解了tilelang的工作机制）2. 速度 （这衡量了我对tilelang的高级特性有多么熟悉）。</p>
+<p>通过这番梳理，我也可以总结tilelang文档，在当前的我看来有什么问题：缺乏准确的概念和行为约束。最简单的例子是，</p>
+<p>T.Kernel</p>
+<p>到底返回了一个什么东西，以至于既可以写成</p>
+<p><code>bx</code></p>
+<p>又可以写成</p>
+<p><code>(bx, by)</code></p>
+<p>…… (这个问题我通过翻api解决了。但是翻api真的太慢了）此外我认为tilelang应当降低编写负担，而不是对cuda常用模式的总结和缩写。要想真正地降低思维负担，就需要一个坚实的不变的抽象，像</p>
+<p>Torch</p>
+<p>那样。</p>
+<p>那么我的目标大概可以这么确定：寻找一个稍微复杂一点的算子（可以通过问GPT），编写tilelang实现，交由GPT查验是否通过。等到有GPU后，可以上机跑，先和参考实现确保数值准确。</p>
+</blockquote>
+<p>顺带一提我注意到tilelang里面写的最易懂的一页文档是 <a href="https://link.zhihu.com/?target=https%3A//tilelang.com/deeplearning_operators/gemv.html">https://tilelang.com/deeplearning_operators/gemv.html</a></p>
+<p>和其他文档的语风完全不一样（感觉有 triton 之姿）。也很感谢这页文档，让我能连蒙带猜tilelang的核心概念。</p>
+<h3 id="example-1">Example 1</h3>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> tilelang</span></span>
+<span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> tilelang.language </span><span style="color:#D73A49">as</span><span style="color:#24292E"> T</span></span>
+<span class="line"><span style="color:#D73A49">from</span><span style="color:#24292E"> tilelang.intrinsics </span><span style="color:#D73A49">import</span><span style="color:#24292E"> make_mma_swizzle_layout</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> matmul</span><span style="color:#24292E">(M, N, K, block_M, block_N, block_K, dtype</span><span style="color:#D73A49">=</span><span style="color:#032F62">"float16"</span><span style="color:#24292E">, accum_dtype</span><span style="color:#D73A49">=</span><span style="color:#032F62">"float"</span><span style="color:#24292E">):</span></span>
+<span class="line"><span style="color:#6F42C1">    @T.prim_func</span><span style="color:#6A737D"> ## T.prim_func是tilelang的入口装饰器。 </span></span>
+<span class="line"><span style="color:#6A737D">                 #被该装饰器装饰后，tilelang会试图编译此函数</span></span>
+<span class="line"><span style="color:#D73A49">    def</span><span style="color:#6F42C1"> main</span><span style="color:#24292E">(</span></span>
+<span class="line"><span style="color:#24292E">        A: T.Tensor((M, K), dtype), </span><span style="color:#6A737D">##tilelang使用Tensor显式声明行如shape,dtype的tensor</span></span>
+<span class="line"><span style="color:#24292E">        B: T.Tensor((K, N), dtype),</span></span>
+<span class="line"><span style="color:#24292E">        C: T.Tensor((M, N), dtype),</span></span>
+<span class="line"><span style="color:#24292E">    ):</span></span>
+<span class="line"><span style="color:#6A737D">        # Initialize Kernel Context</span></span>
+<span class="line"><span style="color:#6A737D"># T.kernel是tilelang的Kernel上下文。被该上下文捕捉的块意味着会在核内运行</span></span>
+<span class="line"><span style="color:#6A737D"># T.kernel(*blocks, *threads)的参数列表的意思是：</span></span>
+<span class="line"><span style="color:#6A737D"># 一个变长blocks，对应gridDim.x, y, z</span></span>
+<span class="line"><span style="color:#6A737D"># 变长threads（kw-only）, 对应blockDim.x, y, z</span></span>
+<span class="line"><span style="color:#6A737D"># 返回值是 Tuple[tilelang.language.kernel.KernelLaunchFrame]</span></span>
+<span class="line"><span style="color:#6A737D"># 注意文档有误。我这里直接跑去搜索了 ir.cc注意到这个问题。</span></span>
+<span class="line"><span style="color:#6A737D"># 返回值是list[tvm.tir.Var]，其实际含义为blockIndex.x, y, z的绑定。</span></span>
+<span class="line"><span style="color:#D73A49">        with</span><span style="color:#24292E"> T.Kernel(T.ceildiv(N, block_N), T.ceildiv(M, block_M), </span><span style="color:#E36209">threads</span><span style="color:#D73A49">=</span><span style="color:#005CC5">128</span><span style="color:#24292E">) </span><span style="color:#D73A49">as</span><span style="color:#24292E"> (bx, by):</span></span>
+<span class="line"><span style="color:#24292E">            A_shared </span><span style="color:#D73A49">=</span><span style="color:#24292E"> T.alloc_shared((block_M, block_K), dtype) </span><span style="color:#6A737D">##exactly __shared__ sm[][]</span></span>
+<span class="line"><span style="color:#24292E">            B_shared </span><span style="color:#D73A49">=</span><span style="color:#24292E"> T.alloc_shared((block_K, block_N), dtype)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">         #alloc_fragment申请了一块fragment mem. 它对应着warp共享的寄存器。这是一个tensor core的概念</span></span>
+<span class="line"><span style="color:#24292E">            C_local  </span><span style="color:#D73A49">=</span><span style="color:#24292E"> T.alloc_fragment((block_M, block_N), accum_dtype)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            # set C_local to 0s</span></span>
+<span class="line"><span style="color:#24292E">            T.clear(C_local)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            #pipeline并行. tilelang会识别出访存/计算命令，然后构建消费者/生产者流水线</span></span>
+<span class="line"><span style="color:#6A737D">          #num_stages=3代表构建三缓冲。num_stages=2是双缓冲。</span></span>
+<span class="line"><span style="color:#D73A49">            for</span><span style="color:#24292E"> ko </span><span style="color:#D73A49">in</span><span style="color:#24292E"> T.Pipelined(T.ceildiv(K, block_K), </span><span style="color:#E36209">num_stages</span><span style="color:#D73A49">=</span><span style="color:#005CC5">3</span><span style="color:#24292E">):</span></span>
+<span class="line"><span style="color:#6A737D">                # T.copy(src, dst)</span></span>
+<span class="line"><span style="color:#24292E">                </span></span>
+<span class="line"><span style="color:#24292E">                T..copy(A[by </span><span style="color:#D73A49">*</span><span style="color:#24292E"> block_M, ko </span><span style="color:#D73A49">*</span><span style="color:#24292E"> block_K], A_shared)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                # Parallel copy tile of B from global to shared memory</span></span>
+<span class="line"><span style="color:#D73A49">                for</span><span style="color:#24292E"> k, j </span><span style="color:#D73A49">in</span><span style="color:#24292E"> T.Parallel(block_K, block_N):</span></span>
+<span class="line"><span style="color:#24292E">                    B_shared[k, j] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> B[ko </span><span style="color:#D73A49">*</span><span style="color:#24292E"> block_K </span><span style="color:#D73A49">+</span><span style="color:#24292E"> k, bx </span><span style="color:#D73A49">*</span><span style="color:#24292E"> block_N </span><span style="color:#D73A49">+</span><span style="color:#24292E"> j]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                # Perform a tile-level GEMM</span></span>
+<span class="line"><span style="color:#24292E">                T.gemm(A_shared, B_shared, C_local)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            # Copy result from local (register fragment) to global memory</span></span>
+<span class="line"><span style="color:#24292E">            T.copy(C_local, C[by </span><span style="color:#D73A49">*</span><span style="color:#24292E"> block_M, bx </span><span style="color:#D73A49">*</span><span style="color:#24292E"> block_N])</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    return</span><span style="color:#24292E"> main</span></span></code></pre>
+<p>T.copy有个神秘的广播语法（我初读代码时怎么也不能理解为什么把标量全赋值到A_shared)</p>
+<p><img alt="image" loading="lazy" decoding="async" fetchpriority="auto" width="1556" height="796" src="/_astro/v2-6e6fa6e1ba98fbc75bc7879171b8cdba_r.N46lL6N__Z1rs9nt.webp" ></p>
+<p>简单来说, <em><code>A[by * block_M, ko * block_K]</code> 这个东西传递到T.copy时，T.copy会获取它的底层指针。而这个tensor的region是1（一个元素）。目标是A_shared, 也是一个指针+region。而A_shared的region比A[] 要大，于是region会发生一个广播（注意不是tensor内容广播）。这个广播的结果是计算出需要复制的字节总数。</em></p>
+<p>底层是一个 DMA引擎 。它取得两个指针和复制的字节数。所以看上去就是从A，起点为 <code>b*block, k*block</code> 的块复制到A-shared.</p>
+<p>tilelang应当使用一个更显式的语法……</p>
+<blockquote>
+<p>先写到这里，interrupt了</p>
+</blockquote> </div> </article> </main>  </body></html> 

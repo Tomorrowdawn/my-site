@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="唐晨夏的个人博客"><meta name="author" content="唐晨夏 (Chenxia Tang)"><link rel="icon" type="image/jpeg" href="/fav.jpg"><link rel="canonical" href="https://blog.tomorrowdawn.cc/posts/%E9%80%9F%E9%80%9Acuda"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><!-- Open Graph --><meta property="og:title" content="速通CUDA | 唐晨夏的博客"><meta property="og:description" content="唐晨夏的个人博客"><meta property="og:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><meta property="og:url" content="https://blog.tomorrowdawn.cc/posts/%E9%80%9F%E9%80%9Acuda"><meta property="og:type" content="article"><meta property="og:site_name" content="唐晨夏的博客"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="速通CUDA | 唐晨夏的博客"><meta name="twitter:description" content="唐晨夏的个人博客"><meta name="twitter:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"唐晨夏的博客","url":"https://blog.tomorrowdawn.cc","author":{"@id":"https://blog.tomorrowdawn.cc/#person"}},{"@type":"Person","@id":"https://blog.tomorrowdawn.cc/#person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc","sameAs":["https://github.com/TomorrowDAW","https://www.zhihu.com/people/tang-chen-xia-48"]}]}</script><title>速通CUDA | 唐晨夏的博客</title> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"速通CUDA","datePublished":"2025-08-01","author":{"@type":"Person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc"},"image":"https://blog.tomorrowdawn.cc/avatar.jpg","url":"https://blog.tomorrowdawn.cc/posts/速通cuda"}</script> <style>:root{--color-bg: #fafafa;--color-text: #333;--color-text-muted: #666;--color-border: #e0e0e0;--color-accent: #333;--color-link: #2563eb;--color-link-hover: #1d4ed8;--font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;--max-width: 1200px;--sidebar-width: 280px}html{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--color-text);background:var(--color-bg)}body{min-height:100vh}a{color:var(--color-link);text-decoration:none;transition:color .15s ease}a:hover{color:var(--color-link-hover);text-decoration:underline}code{font-family:var(--font-mono);font-size:.9em;background:#f0f0f0;padding:.1em .3em;border-radius:3px}pre{background:#f5f5f5;padding:1rem;border-radius:4px;overflow-x:auto}pre code{background:none;padding:0}blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.nav[data-astro-cid-dmqpwcec]{border-bottom:1px solid rgba(15,23,42,.1);background:var(--color-bg)}.nav-content[data-astro-cid-dmqpwcec]{max-width:var(--max-width);margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.nav-links[data-astro-cid-dmqpwcec]{display:flex;gap:1.5rem}.nav-link[data-astro-cid-dmqpwcec]{color:#555;font-size:.95rem;font-weight:500;transition:color .2s ease}.nav-link[data-astro-cid-dmqpwcec]:hover{color:#111;text-decoration:none}.nav-title[data-astro-cid-dmqpwcec]{font-size:1.35rem;font-weight:700;letter-spacing:.04em;color:#111;font-family:Space Grotesk,Inter,system-ui,sans-serif}.nav-title[data-astro-cid-dmqpwcec]:hover{text-decoration:none}
+.container[data-astro-cid-gysqo7gh]{max-width:800px;margin:0 auto;padding:2rem}.post-header[data-astro-cid-gysqo7gh]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}.post-header[data-astro-cid-gysqo7gh] h1[data-astro-cid-gysqo7gh]{font-size:2rem;line-height:1.3;margin-bottom:1rem}.post-meta[data-astro-cid-gysqo7gh]{display:flex;align-items:center;gap:1rem;color:var(--color-text-muted);font-size:.9rem}.tags[data-astro-cid-gysqo7gh]{display:flex;gap:.5rem}.tag[data-astro-cid-gysqo7gh]{padding:.2rem .6rem;background:#f0f0f0;border-radius:3px;font-size:.8rem}.post-content[data-astro-cid-gysqo7gh]{line-height:1.8}.post-content[data-astro-cid-gysqo7gh] h2,.post-excerpt[data-astro-cid-gysqo7gh] h2{font-size:1.5rem;margin:2rem 0 1rem}.post-content[data-astro-cid-gysqo7gh] h3,.post-excerpt[data-astro-cid-gysqo7gh] h3{font-size:1.25rem;margin:1.5rem 0 .75rem}.post-content[data-astro-cid-gysqo7gh] p,.post-excerpt[data-astro-cid-gysqo7gh] p{margin-bottom:1rem}.post-content[data-astro-cid-gysqo7gh] ul,.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ol{margin-bottom:1rem;padding-left:1.5rem}.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ol{list-style-type:decimal}.post-content[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ul{list-style-type:disc}.post-content[data-astro-cid-gysqo7gh] li,.post-excerpt[data-astro-cid-gysqo7gh] li{margin-bottom:.5rem}.post-content[data-astro-cid-gysqo7gh] blockquote,.post-excerpt[data-astro-cid-gysqo7gh] blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}.post-content[data-astro-cid-gysqo7gh] blockquote:before,.post-excerpt[data-astro-cid-gysqo7gh] blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.post-content[data-astro-cid-gysqo7gh] img,.post-excerpt[data-astro-cid-gysqo7gh] img{max-width:100%;height:auto;border-radius:4px}
+</style></head> <body>   <nav class="nav" data-astro-cid-dmqpwcec> <div class="nav-content" data-astro-cid-dmqpwcec> <a href="/" class="nav-title" data-astro-cid-dmqpwcec>Tomorrowdawn's Blog</a> <div class="nav-links" data-astro-cid-dmqpwcec> <a href="/about" class="nav-link" data-astro-cid-dmqpwcec>About</a> </div> </div> </nav>  <main class="container" data-astro-cid-gysqo7gh> <article class="post" data-astro-cid-gysqo7gh> <header class="post-header" data-astro-cid-gysqo7gh> <h1 data-astro-cid-gysqo7gh>速通CUDA</h1> <div class="post-meta" data-astro-cid-gysqo7gh> <time datetime="2025-08-01" data-astro-cid-gysqo7gh>2025-08-01</time> <div class="tags" data-astro-cid-gysqo7gh> <span class="tag" data-astro-cid-gysqo7gh>math</span><span class="tag" data-astro-cid-gysqo7gh>code</span> </div> </div> </header> <div class="post-content" data-astro-cid-gysqo7gh> <p>相比于之前我所编写的纯粹的习题记录，这篇文章汲取了 <a href="https://zhuanlan.zhihu.com/p/1894414626248175945">Python Async，不弄玄虚</a> 的写法，希望以更加直接，不玩弄概念的方式入门CUDA编程。这对我而言也是一次CUDA大复盘。希望这篇文章能帮到各位读者。也希望大家多多分享经验。</p>
+<blockquote>
+<p>实际上刷题学习的方法似乎效率并不高，因为CUDA存在多种实现方式，你很难知道自己的实现否是最高效的。</p>
+</blockquote>
+<p>阅读本文时请注册</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//leetgpu.com/challenges">https://leetgpu.com/challengesleetgpu.com/challenges</a></p>
+<p>该平台已经帮你设置好了环境，因此你无需为复杂的CUDA环境配置焦头烂额。</p>
+<p>废话少说，一个最简单的cuda文件是什么样的？</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#D73A49">#include</span><span style="color:#032F62"> &#x3C;iostream></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">__global__ </span><span style="color:#D73A49">void</span><span style="color:#6F42C1"> copyArray</span><span style="color:#24292E">(</span><span style="color:#D73A49">const</span><span style="color:#D73A49"> int*</span><span style="color:#24292E"> in, </span><span style="color:#D73A49">int*</span><span style="color:#24292E"> out, </span><span style="color:#D73A49">int</span><span style="color:#24292E"> N) {</span></span>
+<span class="line"><span style="color:#D73A49">    int</span><span style="color:#24292E"> tid </span><span style="color:#D73A49">=</span><span style="color:#24292E"> blockIdx.x </span><span style="color:#D73A49">*</span><span style="color:#24292E"> blockDim.x </span><span style="color:#D73A49">+</span><span style="color:#24292E"> threadIdx.x;</span></span>
+<span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> (tid </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> N) out[tid] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> in[tid];</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">int</span><span style="color:#6F42C1"> main</span><span style="color:#24292E">() {</span></span>
+<span class="line"><span style="color:#D73A49">    const</span><span style="color:#D73A49"> int</span><span style="color:#24292E"> N </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 10</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">    int</span><span style="color:#24292E"> h_in[N], h_out[N];</span></span>
+<span class="line"><span style="color:#D73A49">    for</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E"> i</span><span style="color:#D73A49">=</span><span style="color:#005CC5">0</span><span style="color:#24292E">; i</span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E">N; </span><span style="color:#D73A49">++</span><span style="color:#24292E">i) h_in[i] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> i;</span><span style="color:#6A737D"> // 初始化输入数组</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    int</span><span style="color:#D73A49"> *</span><span style="color:#24292E">d_in, </span><span style="color:#D73A49">*</span><span style="color:#24292E">d_out;</span></span>
+<span class="line"><span style="color:#6F42C1">    cudaMalloc</span><span style="color:#24292E">(</span><span style="color:#D73A49">&#x26;</span><span style="color:#24292E">d_in, N </span><span style="color:#D73A49">*</span><span style="color:#D73A49"> sizeof</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#6F42C1">    cudaMalloc</span><span style="color:#24292E">(</span><span style="color:#D73A49">&#x26;</span><span style="color:#24292E">d_out, N </span><span style="color:#D73A49">*</span><span style="color:#D73A49"> sizeof</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6F42C1">    cudaMemcpy</span><span style="color:#24292E">(d_in, h_in, N </span><span style="color:#D73A49">*</span><span style="color:#D73A49"> sizeof</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E">), cudaMemcpyHostToDevice);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">    copyArray</span><span style="color:#D73A49">&#x3C;&#x3C;&#x3C;</span><span style="color:#005CC5">1</span><span style="color:#24292E">, N</span><span style="color:#D73A49">>>></span><span style="color:#24292E">(d_in, d_out, N);</span><span style="color:#6A737D"> // 启动核函数</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6F42C1">    cudaMemcpy</span><span style="color:#24292E">(h_out, d_out, N </span><span style="color:#D73A49">*</span><span style="color:#D73A49"> sizeof</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E">), cudaMemcpyDeviceToHost);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6F42C1">    std</span><span style="color:#24292E">::cout </span><span style="color:#D73A49">&#x3C;&#x3C;</span><span style="color:#032F62"> "h_out[0] = "</span><span style="color:#D73A49"> &#x3C;&#x3C;</span><span style="color:#24292E"> h_out[</span><span style="color:#005CC5">0</span><span style="color:#24292E">] </span><span style="color:#D73A49">&#x3C;&#x3C;</span><span style="color:#032F62"> ", h_out[9] = "</span><span style="color:#D73A49"> &#x3C;&#x3C;</span><span style="color:#24292E"> h_out[</span><span style="color:#005CC5">9</span><span style="color:#24292E">] </span><span style="color:#D73A49">&#x3C;&#x3C;</span><span style="color:#6F42C1"> std</span><span style="color:#24292E">::endl;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6F42C1">    cudaFree</span><span style="color:#24292E">(d_in);</span></span>
+<span class="line"><span style="color:#6F42C1">    cudaFree</span><span style="color:#24292E">(d_out);</span></span>
+<span class="line"><span style="color:#D73A49">    return</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span></code></pre>
+<p>这里我将简要地使用一问一答快速地展示基本概念（我发现这比陈述更容易学习！）：</p>
+<ol>
+<li>如何在GPU上创建数组？</li>
+<li>如何将CPU数据传输到GPU上？</li>
+<li>GPU能干啥？</li>
+<li>blockIdx, blockDim, threadIdx, 这是什么东西？</li>
+<li>copyArray前面的__global__是什么？</li>
+<li>copyArray&#x3C;&#x3C;1, N>>是什么意思？</li>
+<li>blockIdx.x * blockDim.x + threadIdx.x是什么？</li>
+<li>在GPU上该如何访问数据？</li>
+<li>global函数是怎么执行的？</li>
+</ol>
+<p>理解了这些基本概念之后（实际上，我推荐你背诵这些概念！可以将以上内容复制给Gemini让它为你出题反复检验），我们已经可以基本搞清楚完全并行的程序是怎么写的了。但是，要想完成真正的并行计算，我们还需要解决一个重要问题：即线程间通信和同步。</p>
+<h3 id="线程同步">线程同步</h3>
+<p>cuda提供一个 <strong>block级别的同步原语： <code>__syncthreads()</code></strong></p>
+<p>请注意，cuda没有原生的grid级别同步原语。如果你需要Grid同步，最好是写两个global函数（又称核函数，kernel），顺次启动它们。</p>
+<p>__syncthreads会强制线程停在这个调用处，直至所有线程都抵达这句话。</p>
+<h3 id="线程通信">线程通信</h3>
+<p>线程通信是通过内存来实现的。</p>
+<p>譬如之前的copyArray中，所有threads都可以看到Input数组的指针，也因此可以访问Input的任何内容。一个理论上的通信模型可以这样实现：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#D73A49">void</span><span style="color:#6F42C1"> say_hello</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#D73A49"> *</span><span style="color:#E36209">input</span><span style="color:#24292E">, </span><span style="color:#D73A49">int</span><span style="color:#E36209"> N</span><span style="color:#24292E">, </span><span style="color:#D73A49">int</span><span style="color:#E36209"> dst</span><span style="color:#24292E">){</span></span>
+<span class="line"><span style="color:#24292E">     input[dst] </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">void</span><span style="color:#6F42C1"> function</span><span style="color:#24292E">(...){</span></span>
+<span class="line"><span style="color:#D73A49">   if</span><span style="color:#24292E"> threadIdx.x </span><span style="color:#D73A49">==</span><span style="color:#6F42C1"> dst</span><span style="color:#24292E">:</span></span>
+<span class="line"><span style="color:#6F42C1">      __syncthreads</span><span style="color:#24292E">();</span></span>
+<span class="line"><span style="color:#6F42C1">      print</span><span style="color:#24292E">(input[dst]);</span></span>
+<span class="line"><span style="color:#D73A49">   else</span><span style="color:#24292E">:</span></span>
+<span class="line"><span style="color:#6F42C1">      say_hello</span><span style="color:#24292E">(input, N, dst);</span></span>
+<span class="line"><span style="color:#6F42C1">      __syncthreads</span><span style="color:#24292E">();</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span></code></pre>
+<p>由于threads是SIMD执行的，因此只能通过分支的方法来编写不同执行路径。请注意两方调用同步原语的位置：对于发送方而言，先写后同步；对于读者而言，先同步后读。</p>
+<p>当然，这个写法非常低效，实际中不会这么写。CUDA程序最常见的写法是，每个threads向不同位置写入之后，同时调用__syncthreads()使得写入对其他threads生效。</p>
+<h3 id="共享内存">共享内存</h3>
+<p>GPU存在分层内存模型。cudaMalloc分配的内存被称为 <strong>全局内存</strong> ，就像CPU的DRAM一样。</p>
+<p>而 <strong>block内部</strong> 存在叫做 <strong>共享内存</strong> 的，可以类比成高速缓存的内存区域。幸运的是我们可以控制这块区域。</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#24292E">__global__ </span><span style="color:#D73A49">void</span><span style="color:#6F42C1"> kernel</span><span style="color:#24292E">(){</span></span>
+<span class="line"><span style="color:#24292E">      __shared__ </span><span style="color:#D73A49">float</span><span style="color:#24292E"> sm[</span><span style="color:#005CC5">16</span><span style="color:#24292E">];</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span></code></pre>
+<p>通过这种__shared__前缀的方法，我们声明了一个共享内存。请注意，该语句是一个 <strong>block级别语句。</strong> 虽然每个thread都执行了，但是同一个block中只有一个大小为16的sm（而不是每个thread一个）。</p>
+<p>该内存对block内部所有thread可见，而外部不可访问。</p>
+<p>对共享内存的读写非常快，因此如果运算需要频繁读写数据，就可以先将其加载到共享内存中，然后在共享内存中读取。</p>
+<p>Q：什么叫“加载到共享内存中”?</p>
+<p>A：没什么玄乎的。就是 <code>sm[0] = input[i]</code> 。赋值语句意味着加载。</p>
+<p>使用共享内存加速计算的经典应用是矩阵乘。可以参见 <a href="https://zhuanlan.zhihu.com/p/657632577">CUDA（三）：通用矩阵乘法：从入门到熟练</a> 。本文的主要目的是帮助读者克服对CUDA的畏难情绪，快速入门，因此不深入介绍。</p>
+<h3 id="reduce">reduce</h3>
+<p>reduce运算非常普遍；最常见的reduce是sum，这里用sum来介绍。</p>
+<p>不要动任何脑子，背诵以下循环：</p>
+<p><img alt="image" loading="lazy" decoding="async" fetchpriority="auto" width="663" height="187" src="/_astro/v2-49a00ba2bf2834fa005a518f586252a7_r.B3hJsFiv_ZcH13J.webp" ></p>
+<p>这里blockDim.x可以换成任何描述sdata长度的变量。这里的加号可以换成任何满足 f(a, b, c) = f(a, f(a,b))的算子，比如说最大值。</p>
+<p>对于任何需要reduce的地方，默写这个循环即可。具体的解释可以参考 <a href="https://zhuanlan.zhihu.com/p/1905661893739283464">CUDA reduce 算子详解</a> 。 但我个人的体验是， <strong>追求理解不如追求娴熟</strong> 。</p>
+<h3 id="cuda进阶快问快答">CUDA进阶快问快答</h3>
+<ol>
+<li>如何启动一个2D的block？</li>
+<li>2D grid + 2D block, 如何计算当前thread在矩阵中的行row和列col?</li>
+<li>什么是warp？</li>
+<li>什么是warp divergence?</li>
+<li>什么是 bank conflict ?</li>
+<li>什么是Memory Coalescing？</li>
+</ol>
+<p>本文暂时到此为止。笔者将会在想起来的时候更新有用的知识。</p> </div> </article> </main>  </body></html> 

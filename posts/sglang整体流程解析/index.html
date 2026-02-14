@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="唐晨夏的个人博客"><meta name="author" content="唐晨夏 (Chenxia Tang)"><link rel="icon" type="image/jpeg" href="/fav.jpg"><link rel="canonical" href="https://blog.tomorrowdawn.cc/posts/sglang%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><!-- Open Graph --><meta property="og:title" content="SgLang整体流程解析 | 唐晨夏的博客"><meta property="og:description" content="唐晨夏的个人博客"><meta property="og:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><meta property="og:url" content="https://blog.tomorrowdawn.cc/posts/sglang%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90"><meta property="og:type" content="article"><meta property="og:site_name" content="唐晨夏的博客"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="SgLang整体流程解析 | 唐晨夏的博客"><meta name="twitter:description" content="唐晨夏的个人博客"><meta name="twitter:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"唐晨夏的博客","url":"https://blog.tomorrowdawn.cc","author":{"@id":"https://blog.tomorrowdawn.cc/#person"}},{"@type":"Person","@id":"https://blog.tomorrowdawn.cc/#person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc","sameAs":["https://github.com/TomorrowDAW","https://www.zhihu.com/people/tang-chen-xia-48"]}]}</script><title>SgLang整体流程解析 | 唐晨夏的博客</title> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"SgLang整体流程解析","datePublished":"2025-12-04","author":{"@type":"Person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc"},"image":"https://blog.tomorrowdawn.cc/avatar.jpg","url":"https://blog.tomorrowdawn.cc/posts/sglang整体流程解析"}</script> <style>:root{--color-bg: #fafafa;--color-text: #333;--color-text-muted: #666;--color-border: #e0e0e0;--color-accent: #333;--color-link: #2563eb;--color-link-hover: #1d4ed8;--font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;--max-width: 1200px;--sidebar-width: 280px}html{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--color-text);background:var(--color-bg)}body{min-height:100vh}a{color:var(--color-link);text-decoration:none;transition:color .15s ease}a:hover{color:var(--color-link-hover);text-decoration:underline}code{font-family:var(--font-mono);font-size:.9em;background:#f0f0f0;padding:.1em .3em;border-radius:3px}pre{background:#f5f5f5;padding:1rem;border-radius:4px;overflow-x:auto}pre code{background:none;padding:0}blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.nav[data-astro-cid-dmqpwcec]{border-bottom:1px solid rgba(15,23,42,.1);background:var(--color-bg)}.nav-content[data-astro-cid-dmqpwcec]{max-width:var(--max-width);margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.nav-links[data-astro-cid-dmqpwcec]{display:flex;gap:1.5rem}.nav-link[data-astro-cid-dmqpwcec]{color:#555;font-size:.95rem;font-weight:500;transition:color .2s ease}.nav-link[data-astro-cid-dmqpwcec]:hover{color:#111;text-decoration:none}.nav-title[data-astro-cid-dmqpwcec]{font-size:1.35rem;font-weight:700;letter-spacing:.04em;color:#111;font-family:Space Grotesk,Inter,system-ui,sans-serif}.nav-title[data-astro-cid-dmqpwcec]:hover{text-decoration:none}
+.container[data-astro-cid-gysqo7gh]{max-width:800px;margin:0 auto;padding:2rem}.post-header[data-astro-cid-gysqo7gh]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}.post-header[data-astro-cid-gysqo7gh] h1[data-astro-cid-gysqo7gh]{font-size:2rem;line-height:1.3;margin-bottom:1rem}.post-meta[data-astro-cid-gysqo7gh]{display:flex;align-items:center;gap:1rem;color:var(--color-text-muted);font-size:.9rem}.tags[data-astro-cid-gysqo7gh]{display:flex;gap:.5rem}.tag[data-astro-cid-gysqo7gh]{padding:.2rem .6rem;background:#f0f0f0;border-radius:3px;font-size:.8rem}.post-content[data-astro-cid-gysqo7gh]{line-height:1.8}.post-content[data-astro-cid-gysqo7gh] h2,.post-excerpt[data-astro-cid-gysqo7gh] h2{font-size:1.5rem;margin:2rem 0 1rem}.post-content[data-astro-cid-gysqo7gh] h3,.post-excerpt[data-astro-cid-gysqo7gh] h3{font-size:1.25rem;margin:1.5rem 0 .75rem}.post-content[data-astro-cid-gysqo7gh] p,.post-excerpt[data-astro-cid-gysqo7gh] p{margin-bottom:1rem}.post-content[data-astro-cid-gysqo7gh] ul,.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ol{margin-bottom:1rem;padding-left:1.5rem}.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ol{list-style-type:decimal}.post-content[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ul{list-style-type:disc}.post-content[data-astro-cid-gysqo7gh] li,.post-excerpt[data-astro-cid-gysqo7gh] li{margin-bottom:.5rem}.post-content[data-astro-cid-gysqo7gh] blockquote,.post-excerpt[data-astro-cid-gysqo7gh] blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}.post-content[data-astro-cid-gysqo7gh] blockquote:before,.post-excerpt[data-astro-cid-gysqo7gh] blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.post-content[data-astro-cid-gysqo7gh] img,.post-excerpt[data-astro-cid-gysqo7gh] img{max-width:100%;height:auto;border-radius:4px}
+</style></head> <body>   <nav class="nav" data-astro-cid-dmqpwcec> <div class="nav-content" data-astro-cid-dmqpwcec> <a href="/" class="nav-title" data-astro-cid-dmqpwcec>Tomorrowdawn's Blog</a> <div class="nav-links" data-astro-cid-dmqpwcec> <a href="/about" class="nav-link" data-astro-cid-dmqpwcec>About</a> </div> </div> </nav>  <main class="container" data-astro-cid-gysqo7gh> <article class="post" data-astro-cid-gysqo7gh> <header class="post-header" data-astro-cid-gysqo7gh> <h1 data-astro-cid-gysqo7gh>SgLang整体流程解析</h1> <div class="post-meta" data-astro-cid-gysqo7gh> <time datetime="2025-12-04" data-astro-cid-gysqo7gh>2025-12-04</time> <div class="tags" data-astro-cid-gysqo7gh> <span class="tag" data-astro-cid-gysqo7gh>code</span> </div> </div> </header> <div class="post-content" data-astro-cid-gysqo7gh> <p>精心调♥教哈Gemi得到的文档，感觉可读性已经非常好了～</p>
+<h2 id="sglang-整体执行流程">SGLang 整体执行流程</h2>
+<p>本文档旨在介绍 SGLang 的整体执行流程，从入口开始，涵盖关键模块的交互，并为后续深入理解推测解码等高级功能提供基础。</p>
+<h3 id="sglang-宏观架构-router-worker-模式">SGLang 宏观架构： Router-Worker 模式</h3>
+<p>SGLang 采用的是一个典型的“ API 网关 + 多 Worker”的分布式架构，以实现高吞吐量和可扩展性。</p>
+<ol>
+<li><strong>API Server (Router)</strong> :</li>
+</ol>
+<ul>
+<li><strong>实现</strong> : 这是一个用 Rust 编写的高性能 <code>sgl-router</code> 进程，其入口点是 <code>sgl-router/src/main.rs</code> 。</li>
+<li><strong>职责</strong> :</li>
+</ul>
+<ol>
+<li><strong>Inference Worker (Python Worker)</strong> :</li>
+</ol>
+<ul>
+<li><strong>实现</strong> : 这是一个 Python 进程，通过 <code>python -m sglang.launch_server</code> 命令启动。其核心实现在 <code>python/sglang/srt/</code> 目录下，特别是 <code>entrypoints/http_server.py</code> 和 <code>entrypoints/engine.py</code> 。</li>
+<li><strong>职责</strong> :</li>
+</ul>
+<h3 id="请求处理流程">请求处理流程</h3>
+<p>一个典型的请求流程如下：</p>
+<ol>
+<li>用户客户端向 SGLang 的 API Server (Router) 发送一个标准的 OpenAI 格式的 API 请求。</li>
+<li>Router 接收到请求，并根据其内部的负载均衡策略，从健康的 Worker 池中选择一个最合适的 Worker。</li>
+<li>Router 将请求转发给选定的 Worker。</li>
+<li>Worker 接收到请求，调用其内部的 <code>engine</code> ，执行模型的前向传播。</li>
+<li>在执行过程中，Worker 会与 GPU 上的 KV Cache 交互，读取历史 token 的 KV 值，并写入新生成 token 的 KV 值。</li>
+<li>Worker 将推理结果返回给 Router。</li>
+<li>Router 最终将结果返回给用户客户端。</li>
+</ol>
+<h3 id="engine-初始化"><code>Engine</code> 初始化</h3>
+<p>SGLang 的运行时生命周期由 <code>Engine</code> 类（位于 <code>python/sglang/srt/entrypoints/engine.py</code> ）的初始化过程驱动。这个过程精心编排了一系列子进程和服务的启动。</p>
+<h3 id="初始化流程概述">初始化流程概述</h3>
+<ol>
+<li><strong>配置解析 ( <code>ServerArgs</code> )</strong> : <code>Engine</code> 的构造函数接收所有配置参数，并将它们统一封装在 <code>ServerArgs</code> 对象中。这包括模型路径、并行化策略 ( <code>tp_size</code> , <code>pp_size</code> , <code>dp_size</code> )、内存配置等。</li>
+<li><strong>环境设置 ( <code>_set_envs_and_config</code> )</strong> : 设置 NCCL、CUDA 等底层库所需的环境变量，并配置日志、资源限制（ulimit）等。</li>
+<li><strong>启动 Scheduler 进程 ( <code>run_scheduler_process</code> )</strong> : 这是最核心的步骤。</li>
+</ol>
+<ul>
+<li><strong>单机/单 DP 分片</strong> : 根据 <code>tp_size</code> 和 <code>pp_size</code> 启动多个 <code>Scheduler</code> 进程。每个进程负责一个 GPU，并通过 <code>tp_rank</code> 和 <code>pp_rank</code> 参数被告知其在张量/流水线并行中的角色。</li>
+<li><strong>多 DP 分片 ( <code>dp_size > 1</code> )</strong> : 启动一个 <code>DataParallelController</code> 进程，该进程内部会为每个 DP rank 启动一组 <code>Scheduler</code> 进程。</li>
+</ul>
+<ol>
+<li><strong>启动 Detokenizer 进程 ( <code>run_detokenizer_process</code> )</strong> : 启动一个独立的进程，专门负责将模型输出的 token IDs 反序列化为文本。</li>
+<li><strong>初始化 Tokenizer ( <code>_init_tokenizer_manager</code> )</strong> : 在主进程中创建 <code>TokenizerManager</code> ，负责接收外部请求、应用聊天模板、并将 tokenized 的结果通过 ZMQ 发送给 <code>Scheduler</code> 。</li>
+<li><strong>等待与同步</strong> : 主进程会等待所有 <code>Scheduler</code> 进程加载完模型并发送 “ready” 信号后，才完成初始化。</li>
+</ol>
+<h3 id="python-端多进程架构">Python 端多进程架构</h3>
+<p><code>Engine</code> 初始化过程的核心是创建一组协同工作的 Python 进程。这种多进程架构旨在将不同的任务隔离开，以提高整体的吞吐量和鲁棒性。以下是主要的进程及其关系：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+----------------------------------------------------------------------------------------------------------+</span></span>
+<span class="line"><span>|                                     Python Worker Processes (TP > 1)                                     |</span></span>
+<span class="line"><span>|                                                                                                          |</span></span>
+<span class="line"><span>|  +-----------------------+      (ZMQ, Broadcast to ALL)       +---------------------------+              |</span></span>
+<span class="line"><span>|  | Main Process (Engine) |----------------------------------->| Scheduler Process (GPU 0) |              |</span></span>
+<span class="line"><span>|  | - TokenizerManager    |                                     | Scheduler Process (GPU 1) |              |</span></span>
+<span class="line"><span>|  +-----------------------+                                     |            ...            |              |</span></span>
+<span class="line"><span>|            ^                                                    | Scheduler Process (GPU N-1)|              |</span></span>
+<span class="line"><span>|            | (forks)                                            +---------------------------+              |</span></span>
+<span class="line"><span>|            |                                                                  |                            |</span></span>
+<span class="line"><span>|            |                               (All Schedulers make IDENTICAL scheduling decisions)            |</span></span>
+<span class="line"><span>|            |                                                                  |                            |</span></span>
+<span class="line"><span>|  +---------v-------------+                                                    v                            |</span></span>
+<span class="line"><span>|  | Detokenizer Process   |&#x3C;--(ZMQ from rank 0)------------------ (One ModelRunner thread per Scheduler)    |</span></span>
+<span class="line"><span>|  | - Converts IDs to text|                                      (Sync via NCCL All-Reduce during forward) |</span></span>
+<span class="line"><span>|  +-----------------------+                                                                                 |</span></span>
+<span class="line"><span>|                                                                                                          |</span></span>
+<span class="line"><span>+----------------------------------------------------------------------------------------------------------+</span></span></code></pre>
+<ul>
+<li>
+<p><strong>Main Process (Engine)</strong> : 这是 <code>python -m sglang.launch_server</code> 命令启动的父进程。它不直接参与模型计算，主要职责是：</p>
+</li>
+<li>
+<p><strong>Scheduler Process</strong> : 这是推理工作的核心。</p>
+</li>
+</ul>
+<blockquote>
+<p>敏锐的读者可能已经从上图中注意到一个关键细节：当</p>
+<p><code>tp_size > 1</code></p>
+<p>时，系统中存在多个并行的</p>
+<p><code>Scheduler</code></p>
+<p>进程。那么，SGLang 是如何确保在没有中央协调者的情况下，所有这些并行的</p>
+<p><code>Scheduler</code></p>
+<p>能够做出完全一致的决策呢？</p>
+<p>关键在于：</p>
+<p><strong>每个 <code>Scheduler</code> 都在独立地进行决策，但它们总能得到相同的结果。</strong></p>
+<p>因为Scheduler使用了确定性调度算法。这保证没有scheduler瓶颈阻塞整个系统。更重要的是，相比于Scheduler -> N个worker，它省掉了一次进程间通信。</p>
+</blockquote>
+<ul>
+<li><strong>Detokenizer Process</strong> : 这是一个辅助进程。</li>
+</ul>
+<p>这种分离的设计使得 CPU 密集型的任务（如 tokenization）和 GPU 密集型的任务（模型推理）可以并行进行，最大化了硬件利用率。</p>
+<h3 id="模型与权重加载">模型与权重加载</h3>
+<ul>
+<li><strong><code>Scheduler</code> -> <code>TpModelWorker</code> -> <code>ModelRunner</code></strong> : 这是模型权重加载的核心链条。</li>
+<li><strong><code>ModelRunner</code></strong> :</li>
+</ul>
+<h3 id="核心组件与执行流程">核心组件与执行流程</h3>
+<p>SGLang 的执行流程主要围绕以下几个核心组件展开：</p>
+<ul>
+<li><strong><code>Engine</code></strong> : 作为系统的总协调器，负责接收请求、管理调度器和 worker，并返回最终结果。</li>
+<li><strong><code>Scheduler</code></strong> : 位于 <code>python/sglang/srt/managers/scheduler.py</code> ，负责对传入的请求进行批处理（batching）和调度。</li>
+<li><strong><code>TpModelWorker</code></strong> : 位于 <code>python/sglang/srt/managers/tp_worker.py</code> ，代表一个持有模型分片（TP/PP shard）的工作进程。它在 <code>ModelRunner</code> 的帮助下，在 GPU 上执行实际的模型推理。</li>
+<li><strong><code>EAGLEWorker</code></strong> : 位于 <code>python/sglang/srt/speculative/eagle_worker.py</code> ，是 <code>TpModelWorker</code> 的一个特殊版本，专门用于执行 EAGLE 推测解码。</li>
+</ul>
+<h3 id="单机执行流程">单机执行流程</h3>
+<ol>
+<li><strong>请求接收</strong> : <code>Engine</code> 接收来自用户的 <code>GenerationRequest</code> 。</li>
+<li><strong>调度</strong> : <code>Engine</code> 将请求发送给 <code>Scheduler</code> 。 <code>Scheduler</code> 将多个请求组合成一个批次（ <code>ScheduleBatch</code> ）。</li>
+<li><strong>模型推理</strong> : <code>Scheduler</code> 将批处理后的请求分发给 <code>TpModelWorker</code> （或 <code>EAGLEWorker</code> ）。</li>
+<li><strong>前向传播</strong> : <code>TpModelWorker</code> 在其持有的模型分片上执行前向传播。</li>
+<li><strong>返回结果</strong> : <code>Engine</code> 从 <code>Scheduler</code> 获取最终的生成结果，并以流式方式返回给用户。</li>
+</ol>
+<h3 id="scheduler-核心调度循环-handle_requests">Scheduler 核心调度循环： <code>handle_requests</code></h3>
+<p><code>Scheduler</code> 的核心是一个位于 <code>handle_requests</code> 方法中的 <code>while True</code> 无限循环。这个循环是 SGLang 推理服务的心脏，它持续不断地执行以下任务，驱动所有请求从接收到完成的整个生命周期。</p>
+<p>这个核心循环的伪代码如下：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span># in sglang.srt.managers.scheduler.Scheduler.handle_requests</span></span>
+<span class="line"><span>def handle_requests(self):</span></span>
+<span class="line"><span>    while True:</span></span>
+<span class="line"><span>        # 1. 接收新请求</span></span>
+<span class="line"><span>        # 尝试从 Router 非阻塞地接收一个或多个请求</span></span>
+<span class="line"><span>        new_req_inputs = self._recv_new_requests()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        # 2. 处理新请求</span></span>
+<span class="line"><span>        # 将接收到的原始请求输入 (e.g., TokenizedGenerateReqInput)</span></span>
+<span class="line"><span>        # 转换为内部的 Req 对象，并加入到 self.waiting_queue</span></span>
+<span class="line"><span>        for req_input in new_req_inputs:</span></span>
+<span class="line"><span>            self._request_dispatcher.dispatch(req_input)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        # 3. 调度并执行模型</span></span>
+<span class="line"><span>        # 这是最关键的步骤，决定下一个要执行的批次</span></span>
+<span class="line"><span>        self.schedule()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        # 4. 处理模型输出</span></span>
+<span class="line"><span>        # schedule() 内部会调用模型并处理其输出，</span></span>
+<span class="line"><span>        # 包括更新请求状态、发送 token 回复等。</span></span></code></pre>
+<h3 id="请求生命周期详解">请求生命周期详解</h3>
+<p>让我们跟踪一个生成请求（ <code>TokenizedGenerateReqInput</code> ）的完整生命周期，以理解上述循环是如何工作的：</p>
+<ol>
+<li><strong>请求到达</strong> :</li>
+</ol>
+<ul>
+<li>Router 将一个来自用户的 HTTP 请求转换为 <code>TokenizedGenerateReqInput</code> 对象，并通过 ZMQ Socket 发送给一个 Worker 的 <code>Scheduler</code> 进程。</li>
+<li>在 <code>handle_requests</code> 循环的第 1 步， <code>_recv_new_requests</code> 方法通过 <code>self.router_port.recv_pyobj()</code> 接收到这个对象。</li>
+</ul>
+<ol>
+<li><strong>请求入队</strong> :</li>
+</ol>
+<ul>
+<li>循环的第 2 步调用 <code>self._request_dispatcher</code> ，它会匹配到 <code>handle_generate_request</code> 方法。</li>
+<li><code>handle_generate_request</code> 方法进行一系列检查（如长度校验），然后创建一个核心的 <code>Req</code> 对象。这个对象封装了请求的所有信息，包括 prompt token、采样参数、状态等。</li>
+<li>最后，这个 <code>Req</code> 对象被添加到 <code>self.waiting_queue</code> 列表中，等待被调度。</li>
+</ul>
+<ol>
+<li><strong>调度决策 ( <code>schedule</code> 方法)</strong> :</li>
+</ol>
+<ul>
+<li>循环的第 3 步调用 <code>self.schedule()</code> ，这是调度的核心。</li>
+<li><code>schedule()</code> 方法首先会尝试将 <code>self.waiting_queue</code> 中的新请求（prefill 请求）和 <code>self.running_batch</code> 中正在运行的请求（decode 请求）合并。</li>
+<li>它使用 <code>self.policy.schedule()</code> 策略函数来决定哪些请求可以被调度。策略会考虑当前系统的负载、KV Cache 的剩余空间、请求优先级等因素。</li>
+<li>调度的结果是一个 <code>ScheduleBatch</code> 对象，它包含了所有被选中要进行 prefill 或 decode 的请求。</li>
+</ul>
+<ol>
+<li><strong>模型执行</strong> :</li>
+</ol>
+<ul>
+<li><code>schedule()</code> 方法根据 <code>ScheduleBatch</code> 的内容，决定是执行 prefill 还是 decode。</li>
+<li><strong>Prefill</strong> : 如果批次中包含新的请求， <code>schedule()</code> 会调用 <code>self.model_worker.forward_prefill(batch)</code> 。</li>
+<li><strong>Decode</strong> : 如果批次中只包含正在运行的请求，则调用 <code>self.model_worker.forward_extend(batch)</code> 。</li>
+<li>这些 <code>forward_*</code> 方法会触发底层的 <code>ModelRunner</code> 在 GPU 上执行实际的模型前向传播。</li>
+</ul>
+<ol>
+<li><strong>输出处理与状态更新</strong> :</li>
+</ol>
+<ul>
+<li>模型执行完成后， <code>schedule()</code> 方法会调用 <code>self._process_outputs(output_dict)</code> 来处理返回的结果。</li>
+<li><code>_process_outputs</code> 会遍历批次中的每一个请求，更新它们的状态：</li>
+</ul>
+<ol>
+<li><strong>资源释放</strong> :</li>
+</ol>
+<ul>
+<li>对于已完成的请求， <code>schedule()</code> 方法会调用 <code>self._free_request(req)</code> 。</li>
+<li><code>_free_request</code> 会释放该请求占用的所有资源，最重要的是调用 <code>self.tree_cache.free(req)</code> 来归还其占用的 KV Cache 物理块。这些物理块随后可以被新的请求重新使用。</li>
+</ul>
+<p>通过这个 <code>handle_requests</code> -> <code>schedule</code> -> <code>model_worker.forward</code> -> <code>_process_outputs</code> 的闭环， <code>Scheduler</code> 得以高效地处理大量并发请求，实现了持续的批处理（Continuous Batching）。</p>
+<h3 id="并行化与-tensor-形状">并行化与 Tensor 形状</h3>
+<p>SGLang 主要使用张量并行（ Tensor Parallelism , TP）来加速单次 forward 的计算。为了避免 padding 带来的计算浪费，SGLang 的底层 Kernel 采用“摊平”的物理视图，通过 <code>qo_indptr([B+1])</code> 索引来区分批次中的不同序列。</p>
+<ul>
+<li><strong>定义</strong> :</li>
+</ul>
+<h3 id="关键-tensor-的形状变化-tp--1">关键 Tensor 的形状变化 (TP > 1)</h3>
+<ul>
+<li><strong>核心思想</strong> :</li>
+</ul> </div> </article> </main>  </body></html> 

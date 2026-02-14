@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="唐晨夏的个人博客"><meta name="author" content="唐晨夏 (Chenxia Tang)"><link rel="icon" type="image/jpeg" href="/fav.jpg"><link rel="canonical" href="https://blog.tomorrowdawn.cc/posts/%E9%80%9F%E9%80%9Adocker"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><!-- Open Graph --><meta property="og:title" content="速通Docker | 唐晨夏的博客"><meta property="og:description" content="唐晨夏的个人博客"><meta property="og:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><meta property="og:url" content="https://blog.tomorrowdawn.cc/posts/%E9%80%9F%E9%80%9Adocker"><meta property="og:type" content="article"><meta property="og:site_name" content="唐晨夏的博客"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="速通Docker | 唐晨夏的博客"><meta name="twitter:description" content="唐晨夏的个人博客"><meta name="twitter:image" content="https://blog.tomorrowdawn.cc/avatar.jpg"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"唐晨夏的博客","url":"https://blog.tomorrowdawn.cc","author":{"@id":"https://blog.tomorrowdawn.cc/#person"}},{"@type":"Person","@id":"https://blog.tomorrowdawn.cc/#person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc","sameAs":["https://github.com/TomorrowDAW","https://www.zhihu.com/people/tang-chen-xia-48"]}]}</script><title>速通Docker | 唐晨夏的博客</title> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"速通Docker","datePublished":"2025-12-26","author":{"@type":"Person","name":"唐晨夏","alternateName":["Chenxia Tang","TomorrowDawn"],"url":"https://blog.tomorrowdawn.cc"},"image":"https://blog.tomorrowdawn.cc/avatar.jpg","url":"https://blog.tomorrowdawn.cc/posts/速通docker"}</script> <style>:root{--color-bg: #fafafa;--color-text: #333;--color-text-muted: #666;--color-border: #e0e0e0;--color-accent: #333;--color-link: #2563eb;--color-link-hover: #1d4ed8;--font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;--max-width: 1200px;--sidebar-width: 280px}html{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--color-text);background:var(--color-bg)}body{min-height:100vh}a{color:var(--color-link);text-decoration:none;transition:color .15s ease}a:hover{color:var(--color-link-hover);text-decoration:underline}code{font-family:var(--font-mono);font-size:.9em;background:#f0f0f0;padding:.1em .3em;border-radius:3px}pre{background:#f5f5f5;padding:1rem;border-radius:4px;overflow-x:auto}pre code{background:none;padding:0}blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.nav[data-astro-cid-dmqpwcec]{border-bottom:1px solid rgba(15,23,42,.1);background:var(--color-bg)}.nav-content[data-astro-cid-dmqpwcec]{max-width:var(--max-width);margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.nav-links[data-astro-cid-dmqpwcec]{display:flex;gap:1.5rem}.nav-link[data-astro-cid-dmqpwcec]{color:#555;font-size:.95rem;font-weight:500;transition:color .2s ease}.nav-link[data-astro-cid-dmqpwcec]:hover{color:#111;text-decoration:none}.nav-title[data-astro-cid-dmqpwcec]{font-size:1.35rem;font-weight:700;letter-spacing:.04em;color:#111;font-family:Space Grotesk,Inter,system-ui,sans-serif}.nav-title[data-astro-cid-dmqpwcec]:hover{text-decoration:none}
+.container[data-astro-cid-gysqo7gh]{max-width:800px;margin:0 auto;padding:2rem}.post-header[data-astro-cid-gysqo7gh]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}.post-header[data-astro-cid-gysqo7gh] h1[data-astro-cid-gysqo7gh]{font-size:2rem;line-height:1.3;margin-bottom:1rem}.post-meta[data-astro-cid-gysqo7gh]{display:flex;align-items:center;gap:1rem;color:var(--color-text-muted);font-size:.9rem}.tags[data-astro-cid-gysqo7gh]{display:flex;gap:.5rem}.tag[data-astro-cid-gysqo7gh]{padding:.2rem .6rem;background:#f0f0f0;border-radius:3px;font-size:.8rem}.post-content[data-astro-cid-gysqo7gh]{line-height:1.8}.post-content[data-astro-cid-gysqo7gh] h2,.post-excerpt[data-astro-cid-gysqo7gh] h2{font-size:1.5rem;margin:2rem 0 1rem}.post-content[data-astro-cid-gysqo7gh] h3,.post-excerpt[data-astro-cid-gysqo7gh] h3{font-size:1.25rem;margin:1.5rem 0 .75rem}.post-content[data-astro-cid-gysqo7gh] p,.post-excerpt[data-astro-cid-gysqo7gh] p{margin-bottom:1rem}.post-content[data-astro-cid-gysqo7gh] ul,.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ol{margin-bottom:1rem;padding-left:1.5rem}.post-content[data-astro-cid-gysqo7gh] ol,.post-excerpt[data-astro-cid-gysqo7gh] ol{list-style-type:decimal}.post-content[data-astro-cid-gysqo7gh] ul,.post-excerpt[data-astro-cid-gysqo7gh] ul{list-style-type:disc}.post-content[data-astro-cid-gysqo7gh] li,.post-excerpt[data-astro-cid-gysqo7gh] li{margin-bottom:.5rem}.post-content[data-astro-cid-gysqo7gh] blockquote,.post-excerpt[data-astro-cid-gysqo7gh] blockquote{margin:1rem 0;padding:0 1rem 0 1.5rem;position:relative;color:var(--color-text-muted)}.post-content[data-astro-cid-gysqo7gh] blockquote:before,.post-excerpt[data-astro-cid-gysqo7gh] blockquote:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-border)}.post-content[data-astro-cid-gysqo7gh] img,.post-excerpt[data-astro-cid-gysqo7gh] img{max-width:100%;height:auto;border-radius:4px}
+</style></head> <body>   <nav class="nav" data-astro-cid-dmqpwcec> <div class="nav-content" data-astro-cid-dmqpwcec> <a href="/" class="nav-title" data-astro-cid-dmqpwcec>Tomorrowdawn's Blog</a> <div class="nav-links" data-astro-cid-dmqpwcec> <a href="/about" class="nav-link" data-astro-cid-dmqpwcec>About</a> </div> </div> </nav>  <main class="container" data-astro-cid-gysqo7gh> <article class="post" data-astro-cid-gysqo7gh> <header class="post-header" data-astro-cid-gysqo7gh> <h1 data-astro-cid-gysqo7gh>速通Docker</h1> <div class="post-meta" data-astro-cid-gysqo7gh> <time datetime="2025-12-26" data-astro-cid-gysqo7gh>2025-12-26</time> <div class="tags" data-astro-cid-gysqo7gh> <span class="tag" data-astro-cid-gysqo7gh>code</span><span class="tag" data-astro-cid-gysqo7gh>philosophy</span> </div> </div> </header> <div class="post-content" data-astro-cid-gysqo7gh> <p>最近本人有幸跑到公司里面工作，接触了一些现代化的协作流程。这篇文章简单记录一下Docker的使用方法。这篇文章假设读者已经了解Docker的基本作用，但是可能缺乏最佳实践（Best Practice）手册。我无意成为docker高手，因为细节是永远无法穷尽的；但我需要当我需要某个功能时能够立刻操作的手册。So here it is.</p>
+<h3 id="为什么我不需要docker">为什么我不需要Docker</h3>
+<p>在介绍docker之前，我很想谈谈什么情况下不要用docker.</p>
+<ol>
+<li>在代码没有完成之前，不要使用docker. Docker不是依赖管理。它的目标是形成一个稳定的可复用进程。如果你正在开发阶段，请使用依赖管理工具。 当然，如果你的依赖100%不会变（通常是开发后期），那么仍然推荐使用docker. 在前期，如果你的环境一直在变，用docker等价于没用。</li>
+<li>不要用Docker打包GUI服务。By the way, WebUI是可以且推荐的。</li>
+</ol>
+<h3 id="为什么我需要docker">为什么我需要Docker</h3>
+<ol>
+<li>基线。 很多教程可能会提到docker想要终结“在我电脑上能跑”这个问题。但是我更愿意提醒，使用docker可以为你提供稳定的基线参考。</li>
+<li>资源隔离。 不用再担心你的agent rm -rf /了。</li>
+<li>省力。 只需稍加学习，使用docker能帮助你节省大量的精力而不是额外付出精力。</li>
+</ol>
+<h3 id="docker怎么用">Docker怎么用</h3>
+<p>如果你对docker中的所有奇技淫巧感兴趣，那么可以移步其他通用教程。这篇文章只会介绍最常用的最佳实践。</p>
+<h3 id="key-concept">Key Concept</h3>
+<ol>
+<li>物理机。物理机就是你的机器本身。</li>
+<li>镜像。镜像包含了必要的数据文件和入口命令entrypoint.</li>
+<li>构筑镜像。构筑镜像类似于，起一个空的虚拟机器，在里面运行一些命令，将数据保存到内部，以便下次使用。这是由dockerfile指定的。</li>
+<li>容器 。激活镜像得到的运行时被称为容器。这是一个实时的机器。</li>
+</ol>
+<h3 id="构筑镜像">构筑镜像</h3>
+<p>起点：</p>
+<p>在你的物理机上，具有这样一个文件夹结构：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my-awesome-python-app/</span></span>
+<span class="line"><span>├── .dockerignore         # 定义 Docker 构建时忽略的文件和目录 </span></span>
+<span class="line"><span>├── dockerfile.prod       # 用于构建生产环境镜像的 Dockerfile </span></span>
+<span class="line"><span>├── dockerfile.dev        # 开发环境 dockerfile </span></span>
+<span class="line"><span>├── requirements.txt      # Python 依赖文件</span></span>
+<span class="line"><span>|</span></span>
+<span class="line"><span>├── my_awesome_app/       # Python 包，存放所有应用源代码 </span></span>
+<span class="line"><span>│   ├── __init__.py       # 将此目录标记为 Python 包</span></span>
+<span class="line"><span>│   ├── main.py           # 应用主入口文件 </span></span>
+<span class="line"><span>│   ├── routers/          # API 路由/控制器 </span></span>
+<span class="line"><span>│   │   ├── __init__.py</span></span>
+<span class="line"><span>│   │   └── items.py      # 示例路由模块</span></span>
+<span class="line"><span>│   └── services/         # 业务逻辑 </span></span>
+<span class="line"><span>│       ├── __init__.py</span></span>
+<span class="line"><span>│       └── item_service.py # 示例服务模块</span></span>
+<span class="line"><span>|</span></span>
+<span class="line"><span>├── static/               # 存放静态文件 </span></span>
+<span class="line"><span>│   └── index.html</span></span>
+<span class="line"><span>|</span></span>
+<span class="line"><span>└── .venv/                 # Python 虚拟环境</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>与所有常见教程不同的是，本教程强烈推荐使用具体的dockerfile而不是一个笼统的Dockerfile文件。这允许你为不同场景构筑不同依赖，最小化镜像。</p>
+<blockquote>
+<p>但是，dockerignore却只能有有一份。我对这个设计很不满意但无可奈何。如果你需要编写不同的dockerignore, 可能需要再叠一层自动化，例如makefile动态生成dockerignore文件。</p>
+</blockquote>
+<p>你需要编写dockfile来指定你需要哪些数据，安装什么运行时。</p>
+<h3 id="dockerfile">Dockerfile</h3>
+<p>docker如何打包镜像？通过运行以下命令：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>docker build -t name:tag -f dockerfile.dev /path/to/your/build/context</span></span></code></pre>
+<p>这个命令会根据dockerfile.dev，在build-context路径下，构建名为name:tag的镜像。请注意该镜像并不直接存在你的工作路径下，而是由docker托管（且不建议你直接去操控镜像目录）。name:tag就是docker内部的通行标识符。</p>
+<p>现在，你的脑海中应该有两台机器：</p>
+<ol>
+<li>一个被限定在build-context目录下的物理机。在构建过程中，你无法访问build-context的父目录。</li>
+<li>一个空白的虚拟机。这是镜像的前体（请允许我借用这个化学名词）。</li>
+</ol>
+<p>接下来，我们介绍dockerfile的语法。请牢记以上两台机器，因为dockerfile中的命令， <strong>有的运行在物理机上，有的运行在虚拟机上。</strong></p>
+<p>有一条对任何指令都成立的准则：</p>
+<p>任何Dockerfile指令，都会创建一个独立的docker层，使用 <strong>隔离的环境</strong> 运行。也就是说，指令的运行结果只有被持久化到磁盘上的才会储存。要想设置一些持久的环境变量/目录等，需要使用docker提供的专属命令</p>
+<p><strong>CMD和Entrypoint的解析：</strong></p>
+<p>这两者主要的区别在于运行时。docker run image时，可以在后面插入一些参数：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>docker run my-amazing-tool --param 1</span></span></code></pre>
+<p>如果使用CMD, 则CMD会被完整替换成为 <code>["--param", "1"]</code> 。容器会觉得莫名其妙。</p>
+<p>如果使用Entrypoint, 则参数会被 <strong>附加</strong> 到列表后面。</p>
+<p>如果你使用 <code>alias tool=docker run my-amazing-tool</code></p>
+<p>就会发现使用Entrypoint的话， <code>tool params</code> 简直就像你在使用某个CLI工具一样。</p>
+<p>有趣的是这两者可以联用。如果设置了Entrypoint, 则CMD退化成向Entrypoint传递参数。（和位置无关，但是一般将cmd写在后面）。</p>
+<p>这样的好处是，由于CMD可以被覆盖，它起到一个“提供默认参数”的作用。</p>
+<p><strong>数据卷 Volume解析</strong></p>
+<p>这一部分是Docker的重头戏。因为，一个完全隔离的docker容器能做的十分有限（只能通过stdout传输数据，例如echo hello打印）。我们需要一个办法将数据持久化到磁盘上。这是通过</p>
+<p><code>docker run -v src:path</code> 来做到的。</p>
+<p>你可以通过多个 <code>-v</code> 指定多个挂载。 <code>src</code> 有两种形态：</p>
+<ol>
+<li>本地路径。这最适合快速本地调试和开发（例如将代码文件挂进去）。</li>
+<li>数据卷名。使用 <code>docker volume create python-app-logs</code> 创建一个数据卷。你可以使用docker管理，复用这些数据卷（例如使用另外一个容器启动）。 当你需要扩展你的部署时这很有用。</li>
+</ol>
+<p>聪明的同学一定注意到了，如果我的本地刚好有一个 <code>logs</code> 文件夹，那么docker怎么判断到底是数据卷还是文件夹呢？答案是 <strong>永远是数据卷</strong> ，并且 如果你没有logs数据卷，docker不会报错而是帮你创建一个…… 所以挂载时一定要写 <code>./logs</code></p>
+<blockquote>
+<p>罚抄import this 一——千——遍，也——不——够！</p>
+</blockquote>
+<p>.dockerignore:</p>
+<p>dockerignore和gitignore是完全一样的。它用来防止例如 <code>COPY . app/</code> 这样的语句运行时，不小心将一些缓存/秘密 复制过去。这个文件也可以有效地帮助你缩减镜像。</p>
+<p>需要注意，dockerignore必须在build-context路径下，且名字为.dockerignore.</p>
+<h3 id="构筑获取运行">构筑，获取，运行</h3>
+<p>完成dockerfile的编写之后，就进入了构筑/获取/运行阶段。这几个阶段主要是命令行，因此放到一起说明。</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>docker build -t name:tag -f dockerfile .</span></span></code></pre>
+<p>运行该命令构筑镜像。没有更多需要解释的。</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>docker pull name:tag</span></span></code></pre>
+<p>从镜像库拉取镜像保存到本地。如果你对换源感兴趣，可参考 <a href="https://zhuanlan.zhihu.com/p/28662850275">Docker换源加速(更换镜像源)详细教程（2025.1最新可用镜像，全网最详细）【测试成功】</a></p>
+<p>运行命令有很多细节需要说明，因为它会涉及到运行时资源分配（比如说，我想要一个gpu怎么办？）。</p>
+<p>其基本命令如下：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>docker run name:tag </span></span>
+<span class="line"><span>       -p &#x3C;host>:&#x3C;container> \ #host可以带ip。如127.0.0.1:8080:80</span></span>
+<span class="line"><span>       -v &#x3C;src>:&#x3C;dst>\</span></span>
+<span class="line"><span>       -e &#x3C;name>=&#x3C;value> \ #设置环境变量</span></span>
+<span class="line"><span>       --env-files ./.env \ #通过 dot env文件规范设置。</span></span>
+<span class="line"><span>       -m "512m" (or "2g") \#设置内存</span></span>
+<span class="line"><span>       --cpus num\</span></span>
+<span class="line"><span>       --gpus num or "device=1,2" or all \ #分配可见GPU. 注意镜像内必须有cuda-toolkit</span></span>
+<span class="line"><span>       -d \#后台运行</span></span>
+<span class="line"><span>       -it \#提供一个交互式终端</span></span>
+<span class="line"><span>       --rm \#运行结束后立即销毁。非常推荐。</span></span>
+<span class="line"><span>       --name my-cool-name\</span></span></code></pre>
+<p>注解应当比较清楚了。</p>
+<p>有一个高级用法需要提一下。由于nv卡被禁是一个大趋势，学会向docker挂载非nv卡是很有必要的。说白了，不管是什么显卡，都只是一个外部设备，和鼠标键盘什么的没有区别。docker有一种统一的挂载外部设备的方法： <code>--device</code></p>
+<p>因为linux中不管什么设备，最终只是一个文件形态。所以关键就在于找到device对应的文件路径，然后通过—device挂进去。同时还需要group-add（如果设备有权限限制），授权该container访问。随后，如果有驱动文件，还需要通过 <code>-v</code> 挂进去。这里贴一个vllm的启动命令：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span># Update the vllm-ascend image</span></span>
+<span class="line"><span>export IMAGE=quay.io/ascend/vllm-ascend:v0.7.3.post1</span></span>
+<span class="line"><span>docker run --rm \</span></span>
+<span class="line"><span>--name vllm-ascend \</span></span>
+<span class="line"><span>--device /dev/davinci0 \</span></span>
+<span class="line"><span>--device /dev/davinci_manager \</span></span>
+<span class="line"><span>--device /dev/devmm_svm \</span></span>
+<span class="line"><span>--device /dev/hisi_hdc \</span></span>
+<span class="line"><span>-v /usr/local/dcmi:/usr/local/dcmi \</span></span>
+<span class="line"><span>-v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi \</span></span>
+<span class="line"><span>-v /usr/local/Ascend/driver/lib64/:/usr/local/Ascend/driver/lib64/ \</span></span>
+<span class="line"><span>-v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info \</span></span>
+<span class="line"><span>-v /etc/ascend_install.info:/etc/ascend_install.info \</span></span>
+<span class="line"><span>-v /root/.cache:/root/.cache \</span></span>
+<span class="line"><span>-p 8000:8000 \</span></span>
+<span class="line"><span>-it $IMAGE bash</span></span></code></pre>
+<p>Docker Compose 等暂待后续……</p> </div> </article> </main>  </body></html> 
