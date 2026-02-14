@@ -8,7 +8,7 @@ const personJsonLd = JSON.stringify({
   "@type": "Person",
   "@id": `${siteUrl}/#person`,
   "name": "唐晨夏",
-  "alternateName": ["Chenxia Tang", "TomorrowDawn"],
+  "alternateName": ["TomorrowDawn"],
   "url": siteUrl,
   "sameAs": [
     "https://github.com/tomorrowdawn",
@@ -23,7 +23,7 @@ const personJsonLd = JSON.stringify({
 });
 ---
 
-<BaseLayout title="关于我 | 唐晨夏的博客" description="唐晨夏 (Chenxia Tang / TomorrowDawn) - 中国科学技术大学硕士在读，研究方向：大语言模型后训练与推理优化">
+<BaseLayout title="关于我 | 唐晨夏的博客" description="唐晨夏 (TomorrowDawn) - 中国科学技术大学硕士在读，研究方向：大语言模型后训练与推理优化">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={personJsonLd} />
   </Fragment>
@@ -34,7 +34,7 @@ const personJsonLd = JSON.stringify({
 
       <section>
         <p>
-          我是<strong>唐晨夏</strong>（Chenxia Tang），网名 <strong>TomorrowDawn</strong>。
+          我是<strong>唐晨夏</strong>，网名 <strong>TomorrowDawn</strong>。
           目前在<a href="https://www.ustc.edu.cn" target="_blank" rel="noopener noreferrer">中国科学技术大学</a>计算机学院攻读硕士学位，研究方向为大语言模型后训练与推理优化。
         </p>
       </section>
