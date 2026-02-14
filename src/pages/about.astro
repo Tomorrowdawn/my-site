@@ -1,0 +1,116 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Nav from "@components/Nav.astro";
+
+const siteUrl = "https://blog.tomorrowdawn.cc";
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteUrl}/#person`,
+  "name": "唐晨夏",
+  "alternateName": ["Chenxia Tang", "TomorrowDawn"],
+  "url": siteUrl,
+  "sameAs": [
+    "https://github.com/tomorrowdawn",
+    "https://www.zhihu.com/people/tang-chen-xia-48",
+  ],
+  "affiliation": {
+    "@type": "Organization",
+    "name": "University of Science and Technology of China",
+  },
+  "jobTitle": "Master's Student",
+  "knowsAbout": ["Large Language Models", "Post-Training", "Inference Optimization"],
+});
+---
+
+<BaseLayout title="关于我 | 唐晨夏的博客" description="唐晨夏 (Chenxia Tang / TomorrowDawn) - 中国科学技术大学硕士在读，研究方向：大语言模型后训练与推理优化">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={personJsonLd} />
+  </Fragment>
+  <Nav />
+  <main class="container">
+    <article class="about">
+      <h1>关于我</h1>
+
+      <section>
+        <p>
+          我是<strong>唐晨夏</strong>（Chenxia Tang），网名 <strong>TomorrowDawn</strong>。
+          目前在<a href="https://www.ustc.edu.cn" target="_blank" rel="noopener noreferrer">中国科学技术大学</a>计算机学院攻读硕士学位，研究方向为大语言模型后训练与推理优化。
+        </p>
+      </section>
+
+      <section>
+        <h2>教育经历</h2>
+        <ul>
+          <li>中国科学技术大学 计算机学院 硕士（2023 - 至今）</li>
+          <li>中国科学技术大学 少年班学院（2019 - 2023）</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>发表论文</h2>
+        <ul>
+          <li><a href="https://arxiv.org/abs/2411.07641" target="_blank" rel="noopener noreferrer">Top-n&sigma; Sampling: A New Approach for LLM Decoding</a> - ACL 2025</li>
+          <li><a href="https://arxiv.org/abs/2505.10637" target="_blank" rel="noopener noreferrer">Heterogeneous Learning Rate Scheduling for Neural Network Training</a> - arXiv</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>主要项目</h2>
+        <ul>
+          <li><a href="https://github.com/tomorrowdawn/GITCGSimulator" target="_blank" rel="noopener noreferrer">GITCGSimulator</a> - 原神七圣召唤模拟器</li>
+          <li><a href="https://github.com/tomorrowdawn/VLMWalk" target="_blank" rel="noopener noreferrer">VLMWalk</a> - 视觉语言模型探索框架</li>
+          <li><a href="https://github.com/tomorrowdawn/seqattn" target="_blank" rel="noopener noreferrer">seqattn</a> - 序列注意力机制实现</li>
+        </ul>
+        <p>开源贡献被 <a href="https://github.com/ggerganov/llama.cpp" target="_blank" rel="noopener noreferrer">llama.cpp</a> 和 <a href="https://github.com/SillyTavern/SillyTavern" target="_blank" rel="noopener noreferrer">SillyTavern</a> 采用。</p>
+      </section>
+
+      <section>
+        <h2>链接</h2>
+        <ul>
+          <li><a href="https://github.com/tomorrowdawn" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.zhihu.com/people/tang-chen-xia-48" target="_blank" rel="noopener noreferrer">知乎</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .about h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about section {
+    margin-bottom: 2rem;
+  }
+
+  .about h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .about ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+
+  .about li {
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+  }
+
+  .about p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+</style>

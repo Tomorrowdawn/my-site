@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^2.1.3",
+    "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.16.8",
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",

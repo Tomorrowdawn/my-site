@@ -2,20 +2,75 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  url?: string;
+  type?: string;
 }
 
-const { title, description = "Personal blog about Math, Philosophy, and Code" } = Astro.props;
+const siteUrl = "https://blog.tomorrowdawn.cc";
+const {
+  title,
+  description = "唐晨夏的个人博客",
+  image = "/avatar.jpg",
+  url,
+  type = "website",
+} = Astro.props;
+
+const canonicalUrl = url ? new URL(url, siteUrl).href : new URL(Astro.url.pathname, siteUrl).href;
+const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="author" content="唐晨夏 (Chenxia Tang)" />
     <link rel="icon" type="image/jpeg" href="/fav.jpg" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="唐晨夏的博客" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "唐晨夏的博客",
+          "url": siteUrl,
+          "author": { "@id": `${siteUrl}/#person` },
+        },
+        {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          "name": "唐晨夏",
+          "alternateName": ["Chenxia Tang", "TomorrowDawn"],
+          "url": siteUrl,
+          "sameAs": [
+            "https://github.com/TomorrowDAW",
+            "https://www.zhihu.com/people/tang-chen-xia-48",
+          ],
+        },
+      ],
+    })} />
+
     <title>{title}</title>
+    <slot name="head" />
   </head>
   <body>
     <slot />
