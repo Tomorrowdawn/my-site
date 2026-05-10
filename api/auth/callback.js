@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: tokenData.error_description });
     }
 
-    // Return token to CMS using the correct postMessage format
+    // Return token to CMS using Decap/Sveltia standard postMessage format
     const html = `
 <!DOCTYPE html>
 <html>
@@ -42,24 +42,37 @@ export default async function handler(req, res) {
   <title>Authorization Success</title>
 </head>
 <body>
+  <p>Authorization successful! This window should close automatically.</p>
   <script>
     (function() {
       const tokenData = ${JSON.stringify(tokenData)};
 
+      console.log("Token data received:", tokenData);
+      console.log("window.opener exists:", !!window.opener);
+
       function receiveMessage(e) {
-        console.log("receiveMessage %o", e);
-        window.opener.postMessage(
-          {
-            type: 'authorization:github:success',
-            provider: 'github',
-            token: tokenData.access_token
-          },
-          e.origin
-        );
+        console.log("Received message from parent:", e);
+
+        // Send success message with token
+        const message = "authorization:github:success:" + JSON.stringify({
+          token: tokenData.access_token,
+          provider: "github"
+        });
+
+        console.log("Sending success message:", message);
+        window.opener.postMessage(message, e.origin);
         window.removeEventListener("message", receiveMessage, false);
+
+        // Close window after a short delay
+        setTimeout(function() {
+          window.close();
+        }, 1000);
       }
+
       window.addEventListener("message", receiveMessage, false);
-      console.log("Sending message: authorizing:github");
+
+      // Send initial message to parent
+      console.log("Sending authorizing message to parent");
       window.opener.postMessage("authorizing:github", "*");
     })();
   </script>
