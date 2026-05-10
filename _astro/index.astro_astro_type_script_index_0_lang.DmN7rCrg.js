@@ -8,7 +8,7 @@ const l="feeds-cache-v1-";class d{cache=new Map;currentCategory="all";currentPag
         <div class="post-meta">
           ${c.excerptHtml?`<div class="post-excerpt">${c.excerptHtml}</div>`:""}
           <div class="post-footer">
-            <a class="read-more" href="${o}posts/${c.slug}">阅读全文……</a>
+            <a class="read-more" href="${o}posts/${c.slug}">阅读全文</a>
             <span class="post-date">${c.date}</span>
           </div>
         </div>
