@@ -34,8 +34,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: tokenData.error_description });
     }
 
-    // Return token to CMS
-    const tokenString = JSON.stringify(tokenData).replace(/"/g, '&quot;');
+    // Return token to CMS using the correct postMessage format
     const html = `
 <!DOCTYPE html>
 <html>
@@ -45,16 +44,22 @@ export default async function handler(req, res) {
 <body>
   <script>
     (function() {
+      const tokenData = ${JSON.stringify(tokenData)};
+
       function receiveMessage(e) {
         console.log("receiveMessage %o", e);
         window.opener.postMessage(
-          'authorization:github:success:${tokenString}',
+          {
+            type: 'authorization:github:success',
+            provider: 'github',
+            token: tokenData.access_token
+          },
           e.origin
         );
         window.removeEventListener("message", receiveMessage, false);
       }
       window.addEventListener("message", receiveMessage, false);
-      console.log("Sending message: %o", "authorizing:github");
+      console.log("Sending message: authorizing:github");
       window.opener.postMessage("authorizing:github", "*");
     })();
   </script>
