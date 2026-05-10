@@ -49,17 +49,18 @@ const svgIcons: SvgIcons = {
   <div class="avatar">
     <img src={avatar} alt={name} />
   </div>
+  <h3 class="name">{name}</h3>
   <div class="bio">
-    <p set:html={`If you <i>don't have time</i> to do something, it's actually that you <b>don't want</b> to do it.`} />
-    <p set:html={`If you <i>don't know what</i> to do, you're actually doing <b>anxiety</b>.`} />
-    <p set:html={`If you don't know when you can announce to others "<i>I'm done, goodbye</i>", then you'll either <b>never start or never finish</b>.`} />
+    <p set:html={`If you <em>don't have time</em> to do something, it's actually that you <strong>don't want</strong> to do it.`} />
+    <p set:html={`If you <em>don't know what</em> to do, you're actually doing <strong>anxiety</strong>.`} />
+    <p set:html={`If you don't know when you can announce to others "<em>I'm done, goodbye</em>", then you'll either <strong>never start or never finish</strong>.`} />
   </div>
   <div class="links">
-    <h4>Links</h4>
     <div class="link-icons">
       {links.map(link => (
         <a href={link.url} target="_blank" rel="noopener noreferrer" title={link.label}>
           <span set:html={svgIcons[link.icon]} />
+          <span class="link-label">{link.label}</span>
         </a>
       ))}
     </div>
@@ -69,21 +70,24 @@ const svgIcons: SvgIcons = {
 <style>
   .profile {
     width: var(--sidebar-width);
-    padding: 2rem;
-    text-align: center;
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--color-border);
+    position: sticky;
+    top: 4rem;
+    align-self: flex-start;
   }
 
   .avatar {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 1.5rem;
-    border-radius: 50%;
-    border: 2px solid var(--color-border);
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.25rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f0f0f0;
+    background: #f3f4f6;
   }
 
   .avatar img {
@@ -92,16 +96,28 @@ const svgIcons: SvgIcons = {
     object-fit: cover;
   }
 
+  .name {
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
   .bio {
     color: var(--color-text-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.7;
     margin-bottom: 2rem;
-    text-align: left;
+    padding-left: 0.875rem;
+    border-left: 2px solid var(--color-border);
+    font-style: italic;
   }
 
   .bio p {
-    margin: 0.75rem 0;
+    margin: 0.5rem 0;
   }
 
   .bio p:first-child {
@@ -112,44 +128,45 @@ const svgIcons: SvgIcons = {
     margin-bottom: 0;
   }
 
-  .bio i {
+  .bio em {
     font-style: italic;
   }
 
-  .links h4 {
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
+  .bio strong {
+    font-weight: 600;
     color: var(--color-text);
   }
 
   .link-icons {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .link-icons a {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
     border-radius: 4px;
-    background: #f0f0f0;
     color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
     transition: all 0.2s;
   }
 
   .link-icons a:hover {
-    background: var(--color-text);
-    color: white;
-    text-decoration: none;
+    background: #f3f4f6;
+    color: var(--color-text);
   }
 
   .link-icons svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
   }
 
+  .link-label {
+    font-size: 0.8rem;
+  }
 </style>

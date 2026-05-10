@@ -26,8 +26,8 @@ const { title, slug, date, excerpt } = Astro.props;
 
 <style>
   .post-card {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .post-card:last-child {
@@ -36,34 +36,33 @@ const { title, slug, date, excerpt } = Astro.props;
   }
 
   .post-title {
-    font-size: 1.35rem;
-    font-weight: 800;
-    margin-bottom: 0.35rem;
-    line-height: 1.3;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
   }
 
   .post-link {
-    color: #0b0b0d;
+    color: var(--color-text);
     text-decoration: none;
-    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
-    letter-spacing: 0.01em;
+    font-family: var(--font-serif);
     transition: color 0.2s ease;
   }
 
   .post-link:hover {
-    color: #0b172a;
-    text-decoration: none;
+    color: var(--color-accent);
   }
 
   .post-meta {
-    color: rgba(55, 65, 81, 0.75);
-    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
   }
 
   .post-excerpt {
-    margin-top: 0.55rem;
+    margin-top: 0.5rem;
     line-height: 1.8;
-    color: rgba(15, 23, 42, 0.75);
+    color: #4b5563;
+    font-size: 0.9rem;
   }
 
   .post-footer {
@@ -74,14 +73,21 @@ const { title, slug, date, excerpt } = Astro.props;
   }
 
   .read-more {
-    color: rgba(59, 130, 246, 0.9);
+    color: var(--color-accent);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.825rem;
+    font-family: var(--font-sans);
     transition: color 0.2s ease;
   }
 
   .read-more:hover {
-    color: rgba(37, 99, 235, 1);
-    text-decoration: underline;
+    color: var(--color-link-hover);
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
   }
 </style>
