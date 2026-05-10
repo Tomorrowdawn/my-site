@@ -70,8 +70,7 @@ const svgIcons: SvgIcons = {
 <style>
   .profile {
     width: var(--sidebar-width);
-    padding: 2.5rem 2rem;
-    border-right: 1px solid var(--color-border);
+    padding: 2.5rem 2rem 2.5rem 0;
     position: sticky;
     top: 4rem;
     align-self: flex-start;
@@ -81,13 +80,14 @@ const svgIcons: SvgIcons = {
     width: 100px;
     height: 100px;
     margin: 0 auto 1.25rem;
-    border-radius: 6px;
-    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(123, 136, 161, 0.15);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f3f4f6;
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
   .avatar img {
@@ -99,7 +99,7 @@ const svgIcons: SvgIcons = {
   .name {
     text-align: center;
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--color-text);
     margin-bottom: 1.5rem;
@@ -108,12 +108,11 @@ const svgIcons: SvgIcons = {
 
   .bio {
     color: var(--color-text-muted);
-    font-size: 0.85rem;
-    line-height: 1.7;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    line-height: 1.6;
     margin-bottom: 2rem;
-    padding-left: 0.875rem;
-    border-left: 2px solid var(--color-border);
-    font-style: italic;
+    padding: 0 0.5rem;
   }
 
   .bio p {
@@ -129,11 +128,12 @@ const svgIcons: SvgIcons = {
   }
 
   .bio em {
-    font-style: italic;
+    font-style: normal;
+    color: var(--color-text-muted);
   }
 
   .bio strong {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text);
   }
 
@@ -156,7 +156,7 @@ const svgIcons: SvgIcons = {
   }
 
   .link-icons a:hover {
-    background: #f3f4f6;
+    background: var(--color-surface);
     color: var(--color-text);
   }
 

@@ -184,7 +184,7 @@ class FeedsManager {
         <div class="post-meta">
           ${post.excerptHtml ? `<div class="post-excerpt">${post.excerptHtml}</div>` : ""}
           <div class="post-footer">
-            <a class="read-more" href="${normalizedBase}posts/${post.slug}">阅读全文……</a>
+            <a class="read-more" href="${normalizedBase}posts/${post.slug}">阅读全文</a>
             <span class="post-date">${post.date}</span>
           </div>
         </div>

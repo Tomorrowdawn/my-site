@@ -101,8 +101,8 @@ Blog posts use the following frontmatter schema:
 ## Deployment
 
 The site is configured for GitHub Pages deployment:
-- Production base URL: `/my-website`
-- Development base URL: `/`
+- Production site URL: `https://blog.tomorrowdawn.cc`
+- Base URL: `` (empty string, deployed at root)
 - Deploy script: `npm run deploy` (builds and pushes to gh-pages branch)
 
 ## Configuration Files

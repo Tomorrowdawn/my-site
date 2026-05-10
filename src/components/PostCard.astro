@@ -18,7 +18,7 @@ const { title, slug, date, excerpt } = Astro.props;
   <div class="post-meta">
     {excerpt && <div class="post-excerpt">{excerpt}</div>}
     <div class="post-footer">
-      <a class="read-more" href={`/posts/${slug}`}>阅读全文……</a>
+      <a class="read-more" href={`/posts/${slug}`}>阅读全文</a>
       <span class="post-date">{date}</span>
     </div>
   </div>
@@ -26,19 +26,28 @@ const { title, slug, date, excerpt } = Astro.props;
 
 <style>
   .post-card {
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--color-border);
+    padding: 2rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .post-card:hover {
+    background-color: var(--color-surface);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(123, 136, 161, 0.08);
+    border-color: rgba(123, 136, 161, 0.1);
   }
 
   .post-card:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    margin-bottom: 0;
   }
 
   .post-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.4rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
     line-height: 1.4;
   }
 
@@ -61,27 +70,27 @@ const { title, slug, date, excerpt } = Astro.props;
   .post-excerpt {
     margin-top: 0.5rem;
     line-height: 1.8;
-    color: #4b5563;
-    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
   }
 
   .post-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 0.75rem;
+    margin-top: 1.25rem;
   }
 
   .read-more {
-    color: var(--color-accent);
+    color: var(--color-text-muted);
     text-decoration: none;
-    font-size: 0.825rem;
+    font-size: 0.85rem;
     font-family: var(--font-sans);
     transition: color 0.2s ease;
   }
 
   .read-more:hover {
-    color: var(--color-link-hover);
+    color: var(--color-text);
   }
 
   .post-date {

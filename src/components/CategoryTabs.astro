@@ -38,7 +38,6 @@ const normalizedBase = base.endsWith("/") ? base : `${base}/`;
     align-items: center;
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--color-border);
   }
 
   .tab {
@@ -59,8 +58,8 @@ const normalizedBase = base.endsWith("/") ? base : `${base}/`;
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1rem;
-    height: 2px;
+    bottom: -0.5rem;
+    height: 1px;
     background: transparent;
     transition: background 0.2s ease;
   }
@@ -75,7 +74,7 @@ const normalizedBase = base.endsWith("/") ? base : `${base}/`;
   }
 
   .tab.active::after {
-    background: var(--color-accent);
+    background: var(--color-text);
   }
 
   .tab:focus-visible {
