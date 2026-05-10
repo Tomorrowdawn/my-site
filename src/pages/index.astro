@@ -8,7 +8,10 @@ const url = new URL(Astro.request.url);
 const category = url.searchParams.get("category") || "all";
 ---
 
-<BaseLayout title="唐晨夏的博客 | TomorrowDawn's Blog">
+<BaseLayout
+  title="唐晨夏的博客 | TomorrowDawn's Blog"
+  description="唐晨夏（TomorrowDawn）的个人博客，USTC中科大毕业生，分享数学、哲学与编程的思考"
+>
   <Nav />
   <main class="container">
     <Profile />

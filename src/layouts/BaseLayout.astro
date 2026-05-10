@@ -27,6 +27,7 @@ const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).href
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="唐晨夏" />
+    <meta name="keywords" content="唐晨夏, USTC, 中科大, 中国科学技术大学, TomorrowDawn, 数学, 哲学, 编程, 博客" />
     <link rel="icon" type="image/jpeg" href="/fav.jpg" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
@@ -54,16 +55,23 @@ const imageUrl = image.startsWith("http") ? image : new URL(image, siteUrl).href
           "name": "唐晨夏的博客",
           "url": siteUrl,
           "author": { "@id": `${siteUrl}/#person` },
+          "description": "数学、哲学与编程的思考空间",
         },
         {
           "@type": "Person",
           "@id": `${siteUrl}/#person`,
           "name": "唐晨夏",
-          "alternateName": ["TomorrowDawn"],
+          "alternateName": ["TomorrowDawn", "唐晨夏 USTC"],
           "url": siteUrl,
+          "alumniOf": {
+            "@type": "Organization",
+            "name": "中国科学技术大学",
+            "alternateName": ["USTC", "中科大"],
+          },
           "sameAs": [
             "https://github.com/TomorrowDAW",
-            "https://www.zhihu.com/people/tang-chen-xia-48",
+            "https://www.zhihu.com/people/zhinvcni",
+            "https://www.linkedin.com/in/%E5%94%90%E6%99%A8%E5%A4%8F114514191/",
           ],
         },
       ],
