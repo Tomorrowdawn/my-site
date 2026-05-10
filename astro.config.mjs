@@ -10,6 +10,14 @@ export default defineConfig({
   site: "https://blog.tomorrowdawn.cc",
   base: "",
   adapter: vercel(),
+  security: {
+    allowedDomains: [
+      {
+        protocol: "https",
+        hostname: "blog.tomorrowdawn.cc",
+      },
+    ],
+  },
 
   integrations: [sitemap(), react(), keystatic()],
 
