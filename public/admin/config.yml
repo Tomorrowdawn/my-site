@@ -6,6 +6,8 @@ backend:
   name: github
   repo: Tomorrowdawn/my-site
   branch: main
+  base_url: https://api.github.com
+  auth_endpoint: /api/auth
 
 # 媒体文件配置
 media_folder: "src/content/posts/{{slug}}/images"  # 图片保存路径（每篇文章独立文件夹）
