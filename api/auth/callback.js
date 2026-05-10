@@ -35,6 +35,7 @@ export default async function handler(req, res) {
     }
 
     // Return token to CMS
+    const tokenString = JSON.stringify(tokenData).replace(/"/g, '&quot;');
     const html = `
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,7 @@ export default async function handler(req, res) {
       function receiveMessage(e) {
         console.log("receiveMessage %o", e);
         window.opener.postMessage(
-          'authorization:github:success:${JSON.stringify(tokenData)}',
+          'authorization:github:success:${tokenString}',
           e.origin
         );
         window.removeEventListener("message", receiveMessage, false);
