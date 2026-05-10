@@ -6,7 +6,7 @@ backend:
   name: github
   repo: Tomorrowdawn/my-site
   branch: main
-  base_url: https://api.github.com
+  base_url: https://blog.tomorrowdawn.cc
   auth_endpoint: /api/auth
 
 # 媒体文件配置
